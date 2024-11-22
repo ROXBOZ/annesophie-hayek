@@ -41,6 +41,28 @@ export default defineType({
           type: 'string',
           validation: (Rule) => Rule.email().error('Veuillez entrer une adresse email valide.'),
         }),
+        // defineField({
+        //   name: 'availabilities',
+        //   title: 'Disponibilités',
+        //   type: 'array',
+        //   of: [
+        //     {
+        //       type: 'string',
+        //       options: {
+        //         list: [
+        //           {title: 'Lundi', value: 'monday'},
+        //           {title: 'Mardi', value: 'tuesday'},
+        //           {title: 'Mercredi', value: 'wednesday'},
+        //           {title: 'Jeudi', value: 'thursday'},
+        //           {title: 'Vendredi', value: 'friday'},
+        //           {title: 'Samedi', value: 'saturday'},
+        //           {title: 'Dimanche', value: 'sunday'},
+        //         ],
+        //         layout: 'checkbox', // Displays checkboxes for the options
+        //       },
+        //     },
+        //   ],
+        // }),
       ],
     }),
   ],
