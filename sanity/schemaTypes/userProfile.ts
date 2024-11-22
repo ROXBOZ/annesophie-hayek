@@ -14,6 +14,11 @@ export default defineType({
       readOnly: true,
     }),
     defineField({
+      name: 'logo',
+      title: 'Logo',
+      type: 'image',
+    }),
+    defineField({
       name: 'titles',
       title: 'Titres',
       type: 'array',
@@ -40,6 +45,33 @@ export default defineType({
           title: 'Email',
           type: 'string',
           validation: (Rule) => Rule.email().error('Veuillez entrer une adresse email valide.'),
+        }),
+        defineField({
+          name: 'address',
+          title: 'Adresse',
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'street',
+              title: 'Rue, numéro',
+              type: 'string',
+            }),
+            defineField({
+              name: 'city',
+              title: 'ZIP, Ville',
+              type: 'string',
+            }),
+            defineField({
+              name: 'googleMapsLink',
+              title: 'Lien Google Maps',
+              type: 'url',
+            }),
+          ],
+        }),
+        defineField({
+          name: 'sessionLink',
+          title: 'Lien permanent pour séance en ligne',
+          type: 'url',
         }),
         // defineField({
         //   name: 'availabilities',

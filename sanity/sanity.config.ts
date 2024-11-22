@@ -21,6 +21,11 @@ export default defineConfig({
               .id('userProfile')
               .child(S.document().schemaType('userProfile').documentId('userProfile'))
               .icon(() => '👩'),
+            S.listItem()
+              .title('Accueil')
+              .id('home')
+              .child(S.document().schemaType('home').documentId('home'))
+              .icon(() => '🏠'),
           ]),
     }),
     visionTool(),

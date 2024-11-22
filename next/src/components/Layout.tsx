@@ -10,10 +10,10 @@ function Layout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen flex-col bg-primary-50">
-      <Header />
-      <main className="h-auto flex-1 bg-gradient-to-b from-primary-50 to-primary-200 pb-12 pt-6">
-        <div className="mx-auto w-full max-w-[1200px] px-4 md:px-6 lg:px-0">
+    <div className="flex min-h-screen flex-col bg-white text-primary-950">
+      <Header userProfile={userProfile} />
+      <main className="h-auto flex-1 bg-gradient-to-b from-white to-primary-100 py-24">
+        <div className="mx-auto w-full max-w-[1200px] px-4 md:px-6 xl:px-0">
           {children}
         </div>
       </main>
