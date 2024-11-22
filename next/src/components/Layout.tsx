@@ -2,7 +2,13 @@ import Footer from "./Footer";
 import Header from "./Header";
 import React from "react";
 
-function Layout({ children }: { children: React.ReactNode }) {
+function Layout({
+  userProfile,
+  children,
+}: {
+  userProfile: User;
+  children: React.ReactNode;
+}) {
   return (
     <div className="flex min-h-screen flex-col bg-primary-50">
       <Header />
@@ -11,7 +17,7 @@ function Layout({ children }: { children: React.ReactNode }) {
           {children}
         </div>
       </main>
-      <Footer />
+      <Footer userProfile={userProfile} />
     </div>
   );
 }

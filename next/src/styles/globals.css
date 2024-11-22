@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+a {
+  @apply border-primary-400 border-b pb-1 font-bold transition-all duration-500 hover:border-transparent active:text-primary-200;
+}
