@@ -22,10 +22,18 @@ export default defineConfig({
               .child(S.document().schemaType('userProfile').documentId('userProfile'))
               .icon(() => '👩'),
             S.listItem()
+              .title('Menus')
+              .id('menus')
+              .child(S.document().schemaType('menus').documentId('menus'))
+              .icon(() => '✨'),
+            S.listItem()
               .title('Accueil')
               .id('home')
               .child(S.document().schemaType('home').documentId('home'))
               .icon(() => '🏠'),
+            S.documentTypeListItem('page')
+              .title('Pages')
+              .icon(() => '📄'),
           ]),
     }),
     visionTool(),

@@ -1,5 +1,7 @@
 import {defineField, defineType} from 'sanity'
 
+import {seo} from './seo'
+
 export default defineType({
   name: 'home',
   title: 'Accueil',
@@ -16,9 +18,25 @@ export default defineType({
       type: 'langString',
     }),
     defineField({
+      name: 'text',
+      title: 'Texte',
+      type: 'langBlock',
+    }),
+    defineField({
       name: 'video',
       title: 'Video',
       type: 'file',
+    }),
+    defineField({
+      name: 'image',
+      title: 'Image',
+      type: 'image',
+    }),
+    defineField({
+      name: 'seo',
+      title: 'SEO',
+      type: 'object',
+      fields: [...seo],
     }),
   ],
   preview: {

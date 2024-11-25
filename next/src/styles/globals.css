@@ -10,15 +10,7 @@
   src: url("fonts/SourceSans3-VariableFont_wght.ttf") format("truetype");
 }
 
-*,
-.font-sans {
+html {
   font-family: "Source Sans 3";
-}
-
-a {
-  @apply border-primary-400 border-b font-bold transition-all duration-500 hover:border-transparent active:text-primary-200;
-}
-
-a.btn {
-  @apply w-fit border-none bg-primary-800 px-4 py-1 text-primary-50;
+  @apply bg-primary-700;
 }
