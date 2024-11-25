@@ -7,9 +7,9 @@ function CustomHead({
   lang,
   slugs,
 }: {
-  seo: any;
-  lang: string;
-  slugs?: any;
+  seo: Seo;
+  lang: "fr" | "en";
+  slugs?: { fr: { current: string }; en: { current: string } };
 }) {
   const pageTitle =
     seo && seo.pageTitle && seo.pageTitle[lang]
@@ -22,9 +22,6 @@ function CustomHead({
     { lang: "fr", href: `${baseUrl}/fr/${slugs ? slugs.fr.current : ""}` },
     { lang: "fr-FR", href: `${baseUrl}/fr/${slugs ? slugs.fr.current : ""}` },
     { lang: "fr-CH", href: `${baseUrl}/fr/${slugs ? slugs.fr.current : ""}` },
-    { lang: "de", href: `${baseUrl}/de/${slugs ? slugs.de.current : ""}` },
-    { lang: "de-DE", href: `${baseUrl}/de/${slugs ? slugs.de.current : ""}` },
-    { lang: "de-CH", href: `${baseUrl}/de/${slugs ? slugs.de.current : ""}` },
   ];
 
   return (

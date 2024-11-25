@@ -5,19 +5,19 @@ import { client } from "../../config/sanity";
 
 function Page({
   userProfile,
-  home,
+  page,
   menus,
 }: {
   userProfile: User;
-  home: Home;
+  page: Page;
   menus: Menus;
 }) {
   const lang = "fr";
   return (
     <>
-      <CustomHead seo={home.seo} lang={lang} />
+      <CustomHead seo={page.seo || null} lang={lang} />
       <Layout userProfile={userProfile} menus={menus}>
-        coucou
+        <h1>{page.title[lang]}</h1>
       </Layout>
     </>
   );
@@ -59,13 +59,14 @@ export async function getStaticPaths() {
     };
   }
 }
+
 export const getStaticProps = async () => {
   try {
     const userProfile: User = await client.fetch(
       '*[_type == "userProfile"][0]{name, logo {..., asset->{..., metadata{lqip}}}, titles, contactDetails}',
     );
-    const home: Home = await client.fetch(
-      '*[_type == "home"][0]{title, subtitle, text, image{..., asset->{...,metadata {lqip}}}, video{asset->}, seo}',
+    const page: Page = await client.fetch(
+      '*[_type == "page" && slug[$locale].current == $slug && !(_id in path("drafts.**"))][0]{title, subtitle, text, image{..., asset->{...,metadata {lqip}}}, video{asset->}, seo}',
     );
 
     const menus: Menus = await client.fetch(
@@ -81,7 +82,7 @@ export const getStaticProps = async () => {
     return {
       props: {
         userProfile,
-        home,
+        page,
         menus,
       },
     };

@@ -67,7 +67,21 @@ interface Menus {
   footerMenu: Menu[];
 }
 
+interface Seo {
+  pageTitle: {
+    fr: string;
+    en: string;
+  };
+  metaDescription: {
+    fr: string;
+    en: string;
+  };
+}
+
 interface Page {
   name: { fr: string; en: string };
+  title: { fr: string; en: string };
   slug: { fr: { current: string }; en: { current: string } };
+
+  seo: Seo;
 }
