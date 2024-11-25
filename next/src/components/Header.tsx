@@ -41,7 +41,7 @@ function Header({ userProfile, menu }: { userProfile: User; menu: Menu[] }) {
     );
   };
   return (
-    <header className="border-b border-primary-200 py-6">
+    <header className="border-b border-primary-200 py-4">
       <div className="mx-auto flex max-w-[1200px] items-center justify-between px-4 md:px-6 xl:px-0">
         <Logo />
         <HeaderNav />

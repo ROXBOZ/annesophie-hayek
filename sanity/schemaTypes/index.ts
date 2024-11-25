@@ -1,3 +1,4 @@
+import TextSection from './TextSection'
 import blockContent from './blockContent'
 import home from './home'
 import {langBlock} from './langBlock'
@@ -18,4 +19,5 @@ export const schemaTypes = [
   langBlock,
   page,
   menus,
+  TextSection,
 ]

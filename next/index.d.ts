@@ -81,6 +81,7 @@ interface Seo {
 interface Page {
   name: { fr: string; en: string };
   title: { fr: string; en: string };
+  subtitle: { fr: string; en: string };
   slug: { fr: { current: string }; en: { current: string } };
 
   seo: Seo;

@@ -32,13 +32,12 @@ export default defineType({
       title: 'Sous-titre',
       type: 'langText',
     }),
-    // defineField({
-    //   name: 'content',
-    //   title: 'Contenu (texte en bandeau)',
-    //   type: 'array',
-    //   of: [{type: 'paragraph'}, {type: 'iframe'}],
-    //   hidden: ({parent}) => parent && parent?.name?.fr !== 'CGV' && parent?.name?.fr !== 'À propos',
-    // }),
+    defineField({
+      name: 'content',
+      title: 'Contenu',
+      type: 'array',
+      of: [{type: 'textSection'}],
+    }),
 
     // defineField({
     //   name: 'faqs',

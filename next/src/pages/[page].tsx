@@ -18,11 +18,14 @@ function Page({
     <>
       <CustomHead seo={currentPage.seo} lang={lang} />
       <Layout userProfile={userProfile} menus={menus}>
-        <div className="flex flex-col gap-2">
-          <h1 className="text-sm font-bold uppercase tracking-widest text-primary-700">
+        <div className="flex max-w-[65ch] flex-col gap-3">
+          <p className="text-sm font-bold uppercase tracking-widest text-primary-700">
             {currentPage.name[lang]}
-          </h1>
+          </p>
           <h1 className="max-w-[40ch] text-5xl">{currentPage.title[lang]}</h1>
+          {currentPage.subtitle && (
+            <p className="text-lg">{currentPage.subtitle[lang]}</p>
+          )}
         </div>
       </Layout>
     </>
