@@ -12,17 +12,20 @@ export default defineType({
       name: 'name',
       title: 'Name',
       type: 'langString',
+      validation: (Rule: any) => Rule.required(),
     }),
     defineField({
       title: 'Slug',
       name: 'slug',
       type: 'langSlug',
+      validation: (Rule: any) => Rule.required(),
     }),
 
     defineField({
       name: 'title',
       title: 'Titre',
       type: 'langString',
+      validation: (Rule: any) => Rule.required(),
     }),
     defineField({
       name: 'subtitle',

@@ -19,7 +19,7 @@ function Layout({
           {children}
         </div>
       </main>
-      <Footer userProfile={userProfile} />
+      <Footer userProfile={userProfile} menu={menus.footerMenu} />
     </div>
   );
 }

@@ -2,7 +2,7 @@ import { CustomLink } from "./UI/CustomLink";
 import Link from "next/link";
 import React from "react";
 
-function Footer({ userProfile }: { userProfile: User }) {
+function Footer({ userProfile, menu }: { userProfile: User; menu: Menu[] }) {
   const currentYear = new Date().getFullYear();
   const lang = "fr";
 
@@ -118,15 +118,37 @@ function Footer({ userProfile }: { userProfile: User }) {
           </Section>
         </div>
 
-        <div className="mt-24 w-full text-xs">
-          ©{currentYear}, {userProfile.name}. Website by{" "}
-          <Link className="border-none font-semibold" href="/" target="_blank">
-            Velma Studio
-            <span className="sr-only">
-              {lang === "fr" ? "ouvre un nouvel onglet" : "opens in new tab"}
-            </span>
-          </Link>
-          .
+        <div className="mt-24 flex flex-col gap-6">
+          <div className="flex justify-normal gap-6 text-xs">
+            <div>
+              ©{currentYear}, {userProfile.name}. Website by{" "}
+              <Link
+                className="border-none font-semibold"
+                href="/"
+                target="_blank"
+              >
+                Velma Studio
+                <span className="sr-only">
+                  {lang === "fr"
+                    ? "ouvre un nouvel onglet"
+                    : "opens in new tab"}
+                </span>
+              </Link>
+              .
+            </div>{" "}
+            <div className="flex divide-x divide-primary-400">
+              {menu &&
+                menu.map((page: Menu, index: number) => (
+                  <Link
+                    href={page.slug[lang].current}
+                    className="px-3 font-bold first:pl-0"
+                    key={index}
+                  >
+                    {page.name[lang]}
+                  </Link>
+                ))}
+            </div>
+          </div>
         </div>
       </div>
     </footer>

@@ -66,7 +66,7 @@ export default function Home({
     <>
       <CustomHead seo={home.seo} lang={lang} />
       <Layout userProfile={userProfile} menus={menus}>
-        <div className="h-min-h flex flex-col items-start gap-12 md:flex-row-reverse">
+        <div className="h-min-screen flex flex-col items-start gap-12 md:flex-row-reverse">
           <ColText />
           <ColMedia />
         </div>
