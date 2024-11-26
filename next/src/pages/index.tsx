@@ -1,3 +1,4 @@
+import AudioPlayer from "@/components/UI/AudioPlayer";
 import CustomHead from "@/components/CustomHead";
 import Layout from "@/components/Layout";
 import { LinkButton } from "@/components/UI/LinkButton";
@@ -17,60 +18,41 @@ export default function Home({
 }) {
   const { locale } = useRouter();
   const lang: "en" | "fr" = (locale ?? "fr") as "en" | "fr";
-
-  const ColText = () => {
-    return (
-      <div className="flex flex-1 flex-col gap-6">
-        <div className="flex flex-col gap-3 border-b border-primary-200 py-6">
-          <h1 className="flex text-5xl">{home.title[lang]}</h1>
-          {home.subtitle && home.subtitle[lang] && (
-            <p className="text-xl">{home.subtitle[lang]}</p>
-          )}
-        </div>
-        <div className="flex flex-col gap-1">
-          <PortableText value={home.text[lang]} />
-        </div>
-        <div className="flex items-center gap-3">
-          <LinkButton level="primary" href={`${lang}/services`}>
-            Services
-          </LinkButton>
-          <LinkButton href="#contact" level="secondary">
-            Contact
-          </LinkButton>
-        </div>
-      </div>
-    );
-  };
-
-  const ColMedia = () => {
-    return (
-      <div className="flex flex-1 flex-col gap-2 overflow-hidden">
-        <SanityImage
-          image={home.image}
-          alt="Anne-Sophie Hayek"
-          width={1000}
-          height={1000}
-        />
-
-        {lang === "fr" && (
-          <audio controls className="w-full">
-            <source
-              src={home.audio.asset.url}
-              type={home.audio.asset.mimeType}
-            />
-          </audio>
-        )}
-      </div>
-    );
-  };
-
   return (
     <>
       <CustomHead seo={home.seo} lang={lang} />
       <Layout lang={lang} userProfile={userProfile} menus={menus}>
         <div className="h-min-screen flex flex-col items-start gap-12 md:flex-row">
-          <ColMedia />
-          <ColText />
+          {/* Media Column */}
+          <div className="flex flex-1 flex-col gap-2 overflow-hidden">
+            <SanityImage
+              image={home.image}
+              alt="Anne-Sophie Hayek"
+              width={1000}
+              height={1000}
+            />
+            {lang === "fr" && <AudioPlayer audioUrl={home.audio.asset.url} />}
+          </div>
+          {/* Text Column */}
+          <div className="flex flex-1 flex-col gap-6">
+            <div className="flex flex-col gap-3 border-b border-primary-200 py-6">
+              <h1 className="flex text-5xl">{home.title[lang]}</h1>
+              {home.subtitle && home.subtitle[lang] && (
+                <p className="text-xl">{home.subtitle[lang]}</p>
+              )}
+            </div>
+            <div className="flex flex-col gap-1">
+              <PortableText value={home.text[lang]} />
+            </div>
+            <div className="flex items-center gap-3">
+              <LinkButton level="primary" href={`${lang}/services`}>
+                Services
+              </LinkButton>
+              <LinkButton href="#contact" level="secondary">
+                Contact
+              </LinkButton>
+            </div>
+          </div>
         </div>
       </Layout>
     </>

@@ -14,3 +14,33 @@ html {
   font-family: "Source Sans 3";
   @apply bg-primary-700;
 }
+
+.range-input {
+  @apply relative h-10 w-2/3 appearance-none;
+}
+
+.range-input::-webkit-slider-thumb {
+  @apply size-3 cursor-grab appearance-none rounded-full border-transparent bg-primary-800 shadow-md active:cursor-grabbing;
+  transform: translateY(-35%);
+}
+
+.range-input::-moz-range-thumb {
+  @apply size-3 cursor-grab rounded-full border-transparent bg-primary-800 shadow-md active:cursor-grabbing;
+}
+
+.range-input::-ms-thumb {
+  @apply size-3 cursor-grab rounded-full bg-primary-800 shadow-md active:cursor-grabbing;
+  transform: translateY(-35%);
+}
+
+.range-input::-webkit-slider-runnable-track {
+  @apply h-1 rounded-lg border-0 bg-primary-200;
+}
+
+.range-input::-moz-range-track {
+  @apply h-1 rounded-lg border-0 bg-primary-200;
+}
+
+.range-input::-ms-track {
+  @apply h-1 rounded-lg border-0 bg-primary-200;
+}
