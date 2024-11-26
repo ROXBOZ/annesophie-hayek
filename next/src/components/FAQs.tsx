@@ -19,12 +19,14 @@ function FAQs({ faqs, lang }: { faqs: FAQ[]; lang: "en" | "fr" }) {
             <div key={index} className="flex w-full flex-col first:pt-0">
               <button
                 onClick={() => toggleAnswer(index)}
-                className="flex w-full items-center justify-between"
+                className="flex w-full justify-between"
               >
-                <h3 className={` ${expandedIndex === index && "font-bold"}`}>
+                <h3
+                  className={`pr-4 text-left ${expandedIndex === index && "font-bold"}`}
+                >
                   {faq.question[lang]}
                 </h3>
-                <div className="relative *:absolute *:right-0 *:flex *:h-[1.5px] *:w-3 *:bg-primary-950">
+                <div className="relative pt-3 *:absolute *:right-0 *:flex *:h-[1.5px] *:w-3 *:bg-primary-950">
                   <span />
                   <span
                     className={`rotate-90 ${expandedIndex === index && "opacity-0"}`}

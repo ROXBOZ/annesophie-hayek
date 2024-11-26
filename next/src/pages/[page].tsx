@@ -28,7 +28,7 @@ function Page({
     return (
       <div
         key={item._key}
-        className={`flex w-fit flex-col gap-2 ${item.isBannered ? "rounded bg-gradient-to-b from-primary-100 to-primary-200 px-12 py-8" : ""}`}
+        className={`flex w-fit flex-col gap-2 ${item.isBannered ? "rounded bg-gradient-to-b from-primary-100 to-primary-200 px-8 py-8 md:px-12" : ""}`}
       >
         {item.title && <h2 className="text-2xl">{item.title[lang]}</h2>}
         <div className="flex flex-col gap-1">
