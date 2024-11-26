@@ -26,7 +26,7 @@ ul {
 }
 
 .range-input {
-  @apply relative h-10 w-2/3 appearance-none;
+  @apply relative h-10 w-full appearance-none md:w-2/3;
 }
 
 .range-input::-webkit-slider-thumb {

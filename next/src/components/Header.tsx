@@ -67,14 +67,12 @@ function Header({
           <span className={` ${isChecked && "opacity-0"}`} />
         </button>
         {isChecked && (
-          <div className="absolute bottom-0 left-0 right-0 top-0 flex flex-col justify-center gap-3 bg-primary-100 px-12">
+          <div className="absolute bottom-0 left-0 right-0 top-0 flex flex-col justify-center gap-3 divide-y divide-primary-200 bg-primary-100 px-12 *:pt-3">
             {menu &&
               menu.map((page: Menu, index: number) => {
-                const isCurrentPage =
-                  currentPath === "/" + page.slug[lang].current;
                 return (
                   <Link
-                    className={`flex rounded-full px-4 py-1 text-2xl transition-all delay-200 hover:bg-primary-50 active:bg-primary-100 ${isCurrentPage && "bg-primary-50"}`}
+                    className={`flex px-4 py-1 text-2xl first:pt-0`}
                     href={page.slug[lang].current}
                     key={index}
                   >
@@ -82,6 +80,9 @@ function Header({
                   </Link>
                 );
               })}
+            <Link className={`flex px-4 py-1 text-2xl`} href="/#contact">
+              Contact
+            </Link>
           </div>
         )}
       </nav>
