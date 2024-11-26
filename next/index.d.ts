@@ -60,6 +60,7 @@ interface Home {
 }
 
 interface Menu {
+  _id: string;
   name: { fr: string; en: string };
   slug: { fr: { current: string }; en: { current: string } };
 }
@@ -81,10 +82,43 @@ interface Seo {
 }
 
 interface Page {
+  _id: string;
   name: { fr: string; en: string };
   title: { fr: string; en: string };
   subtitle: { fr: string; en: string };
   slug: { fr: { current: string }; en: { current: string } };
-
+  content: (TextSection | LinkButton | ImageSection)[];
   seo: Seo;
+}
+
+interface TextSection {
+  _type: "textSection";
+  _key: string;
+  title: { fr: string; en: string };
+  isBannered?: boolean;
+  text: { fr: any; en: any }; // Assuming `text` is multilingual
+}
+
+interface ImageSection {
+  _type: "imageSection";
+  _key: string;
+  image: Image;
+  alt: { fr: string; en: string };
+  legend: { fr: string; en: string };
+}
+
+interface LinkButton {
+  _type: "linkButton";
+  _key: string;
+  label: { fr: string; en: string };
+  type: "url" | "email";
+
+  level: "primary" | "secondary" | "tertiary";
+  href: string;
+}
+
+interface FAQ {
+  _id: string;
+  question: { fr: string; en: string };
+  answer: { fr: any; en: any };
 }

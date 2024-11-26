@@ -47,7 +47,7 @@ function Footer({
       className="mt-12 bg-primary-600 pb-2 pt-6 text-primary-50"
     >
       <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-3 px-4 md:px-6 xl:px-0">
-        <div className="flex w-full flex-col justify-between gap-3 divide-y divide-primary-500 md:flex-row md:divide-x md:divide-y-0">
+        <div className="flex w-full flex-col justify-between gap-3 divide-y divide-primary-700 md:flex-row md:divide-x md:divide-y-0">
           <Section title={userProfile.name}>
             {userProfile.titles &&
               userProfile.titles.map((title, index) => (
@@ -131,8 +131,8 @@ function Footer({
           </Section>
         </div>
 
-        <div className="mt-24 flex flex-col gap-6">
-          <div className="flex justify-normal gap-6 text-xs">
+        <div className="mt-24 flex flex-col gap-6 md:mx-auto">
+          <div className="flex justify-normal gap-3 divide-x divide-primary-700 text-xs">
             <div>
               ©{currentYear}, {userProfile.name}. Website by{" "}
               <Link
@@ -149,7 +149,7 @@ function Footer({
               </Link>
               .
             </div>{" "}
-            <div className="flex divide-x divide-primary-400">
+            <div className="flex divide-x divide-primary-700 pl-3">
               {menu &&
                 menu.map((page: Menu, index: number) => (
                   <Link

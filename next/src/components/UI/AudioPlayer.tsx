@@ -45,7 +45,7 @@ const AudioPlayer = ({ audioUrl }: { audioUrl: string }) => {
           alt={action}
           width={500}
           height={500}
-          className="size-3"
+          className="size-4"
         />
       </button>
     );
@@ -111,7 +111,12 @@ const AudioPlayer = ({ audioUrl }: { audioUrl: string }) => {
           }}
         />
 
-        <div className="text-xs">1:16</div>
+        {/* Current Time Display */}
+        <div className="text-xs">
+          {audioRef.current
+            ? formatDuration(currTime * audioRef.current.duration)
+            : "0:00"}
+        </div>
       </div>
 
       {/* Hidden Audio Element */}

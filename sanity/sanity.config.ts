@@ -34,6 +34,9 @@ export default defineConfig({
             S.documentTypeListItem('page')
               .title('Pages')
               .icon(() => '📄'),
+            S.documentTypeListItem('faq')
+              .title('Faqs')
+              .icon(() => '🤔'),
           ]),
     }),
     visionTool(),

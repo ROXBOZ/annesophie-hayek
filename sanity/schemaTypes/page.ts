@@ -36,7 +36,7 @@ export default defineType({
       name: 'content',
       title: 'Contenu',
       type: 'array',
-      of: [{type: 'textSection'}],
+      of: [{type: 'textSection'}, {type: 'linkButton'}, {type: 'imageSection'}],
     }),
 
     // defineField({
