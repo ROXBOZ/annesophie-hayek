@@ -23,7 +23,9 @@ function Page({
   const lang: "en" | "fr" = (locale ?? "fr") as "en" | "fr";
   const isServicePage =
     currentPage._id === "a4781abc-b2bc-43d7-a749-6c392cec5612";
-
+  const isFAQPage = currentPage._id === "dde666c8-4c23-4217-b93d-a669dd92acce";
+  console.log("currentPage._id :", currentPage._id);
+  console.log("isFAQPage :", isFAQPage);
   const TextSection: React.FC<{ item: TextSection }> = ({ item }) => {
     return (
       <div
@@ -72,37 +74,40 @@ function Page({
             )}
           </div>
 
-          <div className="mt-16 flex flex-col gap-12">
-            {currentPage.content &&
-              currentPage.content.map((item) => {
-                switch (item._type) {
-                  case "textSection":
-                    return <TextSection key={item._key} item={item} />;
+          {isFAQPage ? (
+            <FAQs faqs={faqs} lang={lang} />
+          ) : (
+            <div className="mt-16 flex flex-col gap-12">
+              {currentPage.content &&
+                currentPage.content.map((item) => {
+                  switch (item._type) {
+                    case "textSection":
+                      return <TextSection key={item._key} item={item} />;
 
-                  case "linkButton":
-                    return (
-                      <LinkButton
-                        key={item._key}
-                        href={
-                          item.type === "url"
-                            ? item.href
-                            : "mailto:" + userProfile.contactDetails?.email
-                        }
-                        level={item.level}
-                      >
-                        {item.label[lang]}
-                      </LinkButton>
-                    );
+                    case "linkButton":
+                      return (
+                        <LinkButton
+                          key={item._key}
+                          href={
+                            item.type === "url"
+                              ? item.href
+                              : "mailto:" + userProfile.contactDetails?.email
+                          }
+                          level={item.level}
+                        >
+                          {item.label[lang]}
+                        </LinkButton>
+                      );
 
-                  case "imageSection":
-                    return <ImageSection key={item._key} item={item} />;
+                    case "imageSection":
+                      return <ImageSection key={item._key} item={item} />;
 
-                  default:
-                    return null;
-                }
-              })}
-          </div>
-
+                    default:
+                      return null;
+                  }
+                })}
+            </div>
+          )}
           {isServicePage && <FAQs faqs={faqs} lang={lang} />}
         </div>
       </Layout>

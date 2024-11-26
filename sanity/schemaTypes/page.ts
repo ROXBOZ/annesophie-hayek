@@ -37,16 +37,9 @@ export default defineType({
       title: 'Contenu',
       type: 'array',
       of: [{type: 'textSection'}, {type: 'linkButton'}, {type: 'imageSection'}],
+      hidden: ({parent}) => parent?.name?.fr === 'faq' || parent?.name?.fr === 'FAQ',
     }),
 
-    // defineField({
-    //   name: 'faqs',
-    //   title: 'FAQs',
-    //   type: 'array',
-    //   of: [{type: 'reference', to: [{type: 'faq'}]}],
-    //   hidden: ({parent}) =>
-    //     (parent && parent?.name?.fr === 'Foire aux questions') || parent?.name?.fr === 'FAQ',
-    // }),
     defineField({
       name: 'seo',
       title: 'SEO',
