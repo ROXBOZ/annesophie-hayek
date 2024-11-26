@@ -96,7 +96,8 @@ interface TextSection {
   _key: string;
   title: { fr: string; en: string };
   isBannered?: boolean;
-  text: { fr: any; en: any }; // Assuming `text` is multilingual
+  text: { fr: any; en: any };
+  image: Image;
 }
 
 interface ImageSection {

@@ -46,17 +46,19 @@ function CustomHead({
           />
         ))}
       </Head>
+
       <Script
-        id="biskoui-script"
+        id="biskoui-sdk"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
             window.biskouiSettings = {
-              clientId: "3268953",
+              clientId: "1246633",
             };
+
             (function (d, s) {
               var t = d.getElementsByTagName(s)[0],
-              e = d.createElement(s);
+                e = d.createElement(s);
               e.async = true;
               e.src = "https://static.biskoui.ch/sdk.js";
               t.parentNode.insertBefore(e, t);

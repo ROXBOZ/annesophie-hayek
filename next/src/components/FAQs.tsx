@@ -22,7 +22,7 @@ function FAQs({ faqs, lang }: { faqs: FAQ[]; lang: "en" | "fr" }) {
                 className="flex w-full justify-between"
               >
                 <h3
-                  className={`pr-4 text-left ${expandedIndex === index && "font-bold"}`}
+                  className={`pr-4 text-left transition-all delay-100 hover:font-bold ${expandedIndex === index && "font-bold"}`}
                 >
                   {faq.question[lang]}
                 </h3>
