@@ -22,15 +22,20 @@ export default defineType({
       title: 'Texte',
       type: 'langBlock',
     }),
-    defineField({
-      name: 'video',
-      title: 'Video',
-      type: 'file',
-    }),
+    // defineField({
+    //   name: 'video',
+    //   title: 'Video',
+    //   type: 'file',
+    // }),
     defineField({
       name: 'image',
       title: 'Image',
       type: 'image',
+    }),
+    defineField({
+      name: 'audio',
+      title: 'Audio',
+      type: 'file',
     }),
     defineField({
       name: 'seo',

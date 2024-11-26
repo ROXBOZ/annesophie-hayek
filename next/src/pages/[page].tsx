@@ -2,6 +2,7 @@ import CustomHead from "@/components/CustomHead";
 import Layout from "@/components/Layout";
 import React from "react";
 import { client } from "../../config/sanity";
+import { useRouter } from "next/router";
 
 function Page({
   userProfile,
@@ -12,12 +13,18 @@ function Page({
   menus: Menus;
   currentPage: Page;
 }) {
-  const lang = "fr";
+  const { locale } = useRouter();
+  const lang: "en" | "fr" = (locale ?? "fr") as "en" | "fr";
 
   return (
     <>
       <CustomHead seo={currentPage.seo} lang={lang} />
-      <Layout userProfile={userProfile} menus={menus}>
+      <Layout
+        slug={currentPage.slug}
+        lang={lang}
+        userProfile={userProfile}
+        menus={menus}
+      >
         <div className="flex max-w-[65ch] flex-col gap-3">
           <p className="text-sm font-bold uppercase tracking-widest text-primary-700">
             {currentPage.name[lang]}

@@ -36,7 +36,9 @@ interface Home {
     fr: any;
     en: any;
   };
-
+  audio: {
+    asset: { url: string; mimeType: string };
+  };
   video: {
     asset: {
       url: string;

@@ -2,9 +2,16 @@ import { CustomLink } from "./UI/CustomLink";
 import Link from "next/link";
 import React from "react";
 
-function Footer({ userProfile, menu }: { userProfile: User; menu: Menu[] }) {
+function Footer({
+  userProfile,
+  menu,
+  lang,
+}: {
+  userProfile: User;
+  menu: Menu[];
+  lang: "en" | "fr";
+}) {
   const currentYear = new Date().getFullYear();
-  const lang = "fr";
 
   const { contactDetails } = userProfile;
   const address = contactDetails?.address;
@@ -55,13 +62,19 @@ function Footer({ userProfile, menu }: { userProfile: User; menu: Menu[] }) {
           >
             <div className="flex h-full flex-col justify-between">
               {contactDetails?.telephone && (
-                <p>
-                  <span>{formattedPhone}</span>
-                  <br />
+                <div>
+                  <CustomLink
+                    href={`tel:${contactDetails.telephone} `}
+                    isExternal={true}
+                    arrow={false}
+                    lang={lang}
+                  >
+                    {formattedPhone}
+                  </CustomLink>
                   <span>
                     ({lang === "fr" ? "appels uniquement" : "calls only"})
                   </span>
-                </p>
+                </div>
               )}
               {contactDetails?.email && (
                 <CustomLink

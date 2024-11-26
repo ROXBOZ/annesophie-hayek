@@ -1,4 +1,4 @@
-import TextSection from './TextSection'
+import TextSection from './textSection'
 import blockContent from './blockContent'
 import home from './home'
 import {langBlock} from './langBlock'
