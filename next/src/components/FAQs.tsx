@@ -15,31 +15,35 @@ function FAQs({ faqs, lang }: { faqs: FAQ[]; lang: "en" | "fr" }) {
       </h2>
       <div className="flex w-full flex-col gap-1 divide-y divide-primary-200 *:pt-1">
         {faqs &&
-          faqs.map((faq: FAQ, index: number) => (
-            <div key={index} className="flex w-full flex-col first:pt-0">
-              <button
-                onClick={() => toggleAnswer(index)}
-                className="flex w-full justify-between"
-              >
-                <h3
-                  className={`pr-4 text-left transition-all delay-100 hover:font-bold ${expandedIndex === index && "font-bold"}`}
-                >
-                  {faq.question[lang]}
-                </h3>
-                <div className="relative pt-3 *:absolute *:right-0 *:flex *:h-[1.5px] *:w-3 *:bg-primary-950">
-                  <span />
-                  <span
-                    className={`rotate-90 ${expandedIndex === index && "opacity-0"}`}
-                  />
+          faqs.map(
+            (faq: FAQ, index: number) =>
+              faq.question[lang] &&
+              faq.answer[lang] && (
+                <div key={index} className="flex w-full flex-col first:pt-0">
+                  <button
+                    onClick={() => toggleAnswer(index)}
+                    className="flex w-full justify-between"
+                  >
+                    <h3
+                      className={`pr-4 text-left transition-all delay-100 hover:font-bold ${expandedIndex === index && "font-bold"}`}
+                    >
+                      {faq.question[lang]}
+                    </h3>
+                    <div className="relative pt-3 *:absolute *:right-0 *:flex *:h-[1.5px] *:w-3 *:bg-primary-950">
+                      <span />
+                      <span
+                        className={`rotate-90 ${expandedIndex === index && "opacity-0"}`}
+                      />
+                    </div>
+                  </button>
+                  {expandedIndex === index && (
+                    <div className="pb-8 pt-2">
+                      <PortableText value={faq.answer[lang]} />
+                    </div>
+                  )}
                 </div>
-              </button>
-              {expandedIndex === index && (
-                <div className="pb-8 pt-2">
-                  <PortableText value={faq.answer[lang]} />
-                </div>
-              )}
-            </div>
-          ))}
+              ),
+          )}
       </div>
     </div>
   );
