@@ -8,7 +8,7 @@ const AudioPlayer = ({
   audioDescription,
 }: {
   audioUrl: string;
-  audioDescription: any;
+  audioDescription: TypedObject | TypedObject[];
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currTime, setCurrTime] = useState(0);
@@ -22,10 +22,13 @@ const AudioPlayer = ({
   useEffect(() => {
     const audio = audioRef.current;
     if (audio) {
-      isPlaying ? audio.play() : audio.pause();
+      if (isPlaying) {
+        audio.play(); // Play audio if isPlaying is true
+      } else {
+        audio.pause(); // Pause audio if isPlaying is false
+      }
     }
   }, [isPlaying]);
-
   // Function to update audio current time when seek bar is adjusted
   const updateCurrTime = useCallback((value: number) => {
     const audio = audioRef.current;

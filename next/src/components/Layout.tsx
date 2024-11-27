@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
-
 import Footer from "./Footer";
 import Header from "./Header";
 import Link from "next/link";
+import React from "react";
 import { useRouter } from "next/router";
 
 function Layout({

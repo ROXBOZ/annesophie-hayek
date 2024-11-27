@@ -88,7 +88,7 @@ interface Page {
   title: { fr: string; en: string };
   subtitle: { fr: string; en: string };
   slug: { fr: { current: string }; en: { current: string } };
-  content: (TextSection | LinkButton | ImageSection)[];
+  content: (TextSection | LinkButton | ImageSection | ButtonSection)[];
   seo: Seo;
 }
 
@@ -109,11 +109,18 @@ interface ImageSection {
   legend: { fr: string; en: string };
 }
 
+interface ButtonSection {
+  _type: "buttonSection";
+  _key: string;
+  title: { fr: string; en: string };
+  buttons: LinkButton[];
+}
+
 interface LinkButton {
   _type: "linkButton";
   _key: string;
   label: { fr: string; en: string };
-  type: "url" | "email";
+  type: "url" | "email" | "tel";
 
   level: "primary" | "secondary" | "tertiary";
   href: string;
@@ -123,4 +130,9 @@ interface FAQ {
   _id: string;
   question: { fr: string; en: string };
   answer: { fr: any; en: any };
+}
+
+interface TypedObject {
+  _type: string; // For example, 'block', 'image', etc.
+  [key: string]: any; // This allows for any additional fields you may need for the content.
 }

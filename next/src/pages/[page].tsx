@@ -62,7 +62,7 @@ function Page({
       </div>
     );
   };
-  const ButtonSection: React.FC<{ item: any }> = ({ item }) => {
+  const ButtonSection: React.FC<{ item: ButtonSection }> = ({ item }) => {
     return (
       <div className="flex flex-col gap-3">
         {item.title && item.title[lang] && (
@@ -71,7 +71,7 @@ function Page({
         <div className="flex flex-wrap items-baseline gap-3">
           {item &&
             item.buttons &&
-            item.buttons.map((button: any) => {
+            item.buttons.map((button) => {
               return (
                 <LinkButton
                   key={button._key}
@@ -133,7 +133,7 @@ function Page({
                     case "textSection":
                       return <TextSection key={item._key} item={item} />;
 
-                    case "linkButton":
+                    case "buttonSection":
                       return <ButtonSection key={item._key} item={item} />;
 
                     case "imageSection":
