@@ -33,6 +33,28 @@ function Page({
   const formattedPhone = userProfile.contactDetails?.telephone
     ? formatSwissPhoneNumber(userProfile.contactDetails.telephone)
     : "";
+
+  // const [isTransitioning, setIsTransitioning] = useState(false);
+  // const router = useRouter();
+
+  // useEffect(() => {
+  //   const handleRouteChangeStart = () => {
+  //     setIsTransitioning(true);
+  //   };
+
+  //   const handleRouteChangeComplete = () => {
+  //     setIsTransitioning(false);
+  //   };
+
+  //   router.events.on("routeChangeStart", handleRouteChangeStart);
+  //   router.events.on("routeChangeComplete", handleRouteChangeComplete);
+
+  //   return () => {
+  //     router.events.off("routeChangeStart", handleRouteChangeStart);
+  //     router.events.off("routeChangeComplete", handleRouteChangeComplete);
+  //   };
+  // }, [router]);
+
   const TextSection: React.FC<{ item: TextSection }> = ({ item }) => {
     return (
       <div
@@ -98,6 +120,21 @@ function Page({
 
   return (
     <>
+      {/* <AnimatePresence>
+        {isTransitioning && (
+          <motion.div
+            className="absolute left-1/2 top-1/2 z-50 h-10 w-10 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-t from-teal-200 to-blue-200 mix-blend-multiply"
+            initial={{ scale: 0 }}
+            animate={{ scale: 500 }}
+            exit={{ scale: 0 }}
+            transition={{
+              duration: 1,
+              ease: "easeInOut",
+            }}
+          />
+        )}
+      </AnimatePresence> */}
+
       <CustomHead seo={currentPage.seo} lang={lang} />
       <Layout
         slug={currentPage.slug}

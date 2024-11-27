@@ -81,7 +81,7 @@ export default function Home({
                 </LinkButton>
               </div>
 
-              <div className="anim el">
+              <div className="anim-el">
                 <LinkButton href="#contact" level="secondary">
                   {lang === "fr" ? "Me contacter" : "Get in touch"}
                 </LinkButton>

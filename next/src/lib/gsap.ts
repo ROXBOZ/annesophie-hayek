@@ -26,14 +26,14 @@ export const useAnimateElements = () => {
         {
           opacity: 1,
           filter: "blur(0px)",
-          stagger: {
-            amount: 2,
-            from: "start",
-          },
+          // stagger: {
+          //   amount: 2,
+          //   from: "start",
+          // },
           duration: 1,
           ease: "accelerate",
         },
-        "-=1",
+        "-=2",
       );
   }, []);
 };
