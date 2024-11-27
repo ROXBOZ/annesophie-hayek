@@ -37,7 +37,7 @@ function Page({
     return (
       <div
         key={item._key}
-        className={`flex w-fit flex-col gap-2 ${item.isBannered ? "rounded bg-gradient-to-b from-primary-100 to-primary-200 px-8 py-8 md:px-12" : ""}`}
+        className={`flex w-fit flex-col gap-2 ${item.isBannered ? "rounded-xl bg-gradient-to-t from-primary-100 via-primary-50 to-primary-200 px-8 py-8 md:px-12" : ""}`}
       >
         {item.title && (
           <h2 className={`text-2xl ${lang === "en" && "capitalize"}`}>
