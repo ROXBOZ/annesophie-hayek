@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import Image from "next/image";
 import { PortableText } from "@portabletext/react";
@@ -14,58 +14,54 @@ const AudioPlayer = ({
   const [currTime, setCurrTime] = useState(0);
   const [newTime, setNewTime] = useState(0);
   const [isSeeking, setIsSeeking] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // Effect to play/pause audio
+  // Play or pause audio based on isPlaying state
   useEffect(() => {
     const audio = audioRef.current;
     if (audio) {
-      if (isPlaying) {
-        audio.play();
-      } else {
-        audio.pause();
-      }
+      isPlaying ? audio.play() : audio.pause();
     }
   }, [isPlaying]);
 
-  const updateCurrTime = (value: number) => {
+  // Function to update audio current time when seek bar is adjusted
+  const updateCurrTime = useCallback((value: number) => {
     const audio = audioRef.current;
     if (audio) {
       audio.currentTime = value * audio.duration;
     }
-  };
+  }, []);
 
-  const PlayerButton = ({
-    onClickFunction,
-    action,
-  }: {
-    onClickFunction: () => void;
-    action: string;
-  }) => {
-    return (
-      <button
-        onClick={onClickFunction}
-        className="flex aspect-square h-auto rounded-full bg-primary-200 p-2 ring-inset ring-primary-300 transition-all delay-100 hover:ring active:bg-primary-300"
-      >
-        <Image
-          src={`SVGs/${action}.svg`}
-          alt={action}
-          width={500}
-          height={500}
-          className="size-4"
-        />
-      </button>
-    );
-  };
-
+  // Format audio duration into "minutes:seconds"
   const formatDuration = (durationInSeconds: number) => {
     const minutes = Math.floor(durationInSeconds / 60);
     const seconds = Math.floor(durationInSeconds % 60);
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
 
-  const [showModal, setShowModal] = useState(false);
+  // Handlers for backward and forward buttons
+  const handleBackward = useCallback(() => {
+    const audio = audioRef.current;
+    if (audio) {
+      audio.currentTime = Math.max(audio.currentTime - 10, 0);
+    }
+  }, []);
 
+  const handleForward = useCallback(() => {
+    const audio = audioRef.current;
+    if (audio) {
+      audio.currentTime = Math.min(audio.currentTime + 10, audio.duration);
+    }
+  }, []);
+
+  // Play/Pause toggle handler
+  const togglePlayPause = useCallback(() => {
+    setIsPlaying((prev) => !prev);
+  }, []);
+
+  // Modal component for audio description
   const Modal = () => {
     const modalRef = useRef<HTMLDivElement | null>(null);
 
@@ -95,7 +91,7 @@ const AudioPlayer = ({
         onClick={handleBackgroundClick}
         className="fixed bottom-0 left-0 right-0 top-0 z-50 flex items-center justify-center bg-gradient-to-b from-teal-950/80 to-blue-950/80 p-4"
       >
-        <div className="min-h-1/2 relative w-full rounded-xl bg-white p-12 md:w-1/2">
+        <div className="min-h-1/2 relative w-full rounded-xl bg-white px-12 pb-24 pt-12 md:w-1/2">
           <button
             className="absolute right-4 top-4 flex aspect-square rounded-full p-3 ring-inset ring-primary-50 transition-all delay-200 hover:ring active:bg-primary-50"
             onClick={() => {
@@ -105,11 +101,42 @@ const AudioPlayer = ({
             <span className="leading-3">✕</span>
             <span className="sr-only">fermer</span>
           </button>
-          <div className="mx-auto flex max-w-[65ch] flex-col gap-2 text-lg">
+          <div className="mx-auto flex max-w-[65ch] flex-col gap-2">
+            <h2 className="pb-3 text-3xl">Audiodescription</h2>
             <PortableText value={audioDescription} />
           </div>
         </div>
       </div>
+    );
+  };
+
+  // Reusable player button component
+  const PlayerButton = ({
+    onClickFunction,
+    action,
+    isActive = false,
+  }: {
+    onClickFunction: () => void;
+    action: string;
+    isActive?: boolean;
+  }) => {
+    return (
+      <button
+        onClick={onClickFunction}
+        className={`flex aspect-square h-auto rounded-full p-2 ring-inset transition-all delay-200 hover:ring ${
+          isActive
+            ? "bg-primary-300 ring-primary-400"
+            : "bg-primary-200 ring-primary-300"
+        }`}
+      >
+        <Image
+          src={`SVGs/${action}.svg`}
+          alt={action}
+          width={500}
+          height={500}
+          className="size-4"
+        />
+      </button>
     );
   };
 
@@ -118,38 +145,22 @@ const AudioPlayer = ({
       {showModal && audioDescription && <Modal />}
       <div className="flex flex-col items-center">
         <div className="flex w-full">
+          {/* Playback Controls */}
           <div className="ml-8 flex flex-grow items-center justify-center gap-4">
-            {/* Backward Button */}
             <PlayerButton
               aria-label="Backward 10 seconds"
-              onClickFunction={() => {
-                const audio = audioRef.current;
-                if (audio) {
-                  audio.currentTime = Math.max(audio.currentTime - 10, 0);
-                }
-              }}
+              onClickFunction={handleBackward}
               action="backward"
             />
-
-            {/* Play/Pause Button */}
             <PlayerButton
               aria-label={isPlaying ? "Pause" : "Play"}
-              onClickFunction={() => setIsPlaying(!isPlaying)} // Toggle play/pause
+              onClickFunction={togglePlayPause}
               action={isPlaying ? "pause" : "play"}
+              isActive={isPlaying}
             />
-
-            {/* Forward Button */}
             <PlayerButton
               aria-label="Forward 10 seconds"
-              onClickFunction={() => {
-                const audio = audioRef.current;
-                if (audio) {
-                  audio.currentTime = Math.min(
-                    audio.currentTime + 10,
-                    audio.duration,
-                  );
-                }
-              }}
+              onClickFunction={handleForward}
               action="forward"
             />
           </div>
@@ -158,9 +169,7 @@ const AudioPlayer = ({
               Audiodescription
             </div>
             <PlayerButton
-              onClickFunction={() => {
-                setShowModal(!showModal);
-              }}
+              onClickFunction={() => setShowModal((prev) => !prev)}
               action="read"
             />
           </div>
@@ -184,8 +193,6 @@ const AudioPlayer = ({
               setNewTime(parseFloat(e.currentTarget.value));
             }}
           />
-
-          {/* Current Time Display */}
           <div className="text-xs">
             {audioRef.current
               ? formatDuration(currTime * audioRef.current.duration)
