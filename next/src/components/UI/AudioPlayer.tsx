@@ -35,8 +35,6 @@ const AudioPlayer = ({
     }
   };
 
-  console.log("audioDescription :", audioDescription);
-
   const PlayerButton = ({
     onClickFunction,
     action,
@@ -69,18 +67,39 @@ const AudioPlayer = ({
   const [showModal, setShowModal] = useState(false);
 
   const Modal = () => {
+    const modalRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+      if (modalRef.current) {
+        modalRef.current.focus();
+      }
+    }, []);
+
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+      if (event.key === "Escape") {
+        setShowModal(false);
+      }
+    };
+
+    const handleBackgroundClick = (event: React.MouseEvent<HTMLDivElement>) => {
+      if (event.target === event.currentTarget) {
+        setShowModal(false);
+      }
+    };
+
     return (
       <div
-        onClick={() => {
-          setShowModal(!showModal);
-        }}
+        ref={modalRef}
+        tabIndex={0}
+        onKeyDown={handleKeyDown}
+        onClick={handleBackgroundClick}
         className="fixed bottom-0 left-0 right-0 top-0 z-50 flex items-center justify-center bg-gradient-to-b from-teal-950/80 to-blue-950/80 p-4"
       >
-        <div className="min-h-1/2 relative w-full rounded-xl bg-white px-6 py-12 md:w-1/2">
+        <div className="min-h-1/2 relative w-full rounded-xl bg-white p-12 md:w-1/2">
           <button
             className="absolute right-4 top-4 flex aspect-square rounded-full p-3 ring-inset ring-primary-50 transition-all delay-200 hover:ring active:bg-primary-50"
             onClick={() => {
-              setShowModal(!showModal);
+              setShowModal(false);
             }}
           >
             <span className="leading-3">✕</span>
