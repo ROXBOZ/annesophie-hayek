@@ -1,8 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 
 import Image from "next/image";
+import { PortableText } from "@portabletext/react";
 
-const AudioPlayer = ({ audioUrl }: { audioUrl: string }) => {
+const AudioPlayer = ({
+  audioUrl,
+  audioDescription,
+}: {
+  audioUrl: string;
+  audioDescription: any;
+}) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currTime, setCurrTime] = useState(0);
   const [newTime, setNewTime] = useState(0);
@@ -27,6 +34,8 @@ const AudioPlayer = ({ audioUrl }: { audioUrl: string }) => {
       audio.currentTime = value * audio.duration;
     }
   };
+
+  console.log("audioDescription :", audioDescription);
 
   const PlayerButton = ({
     onClickFunction,
@@ -57,81 +66,128 @@ const AudioPlayer = ({ audioUrl }: { audioUrl: string }) => {
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
 
-  return (
-    <div className="flex flex-col items-center">
-      <div className="flex items-center gap-4">
-        {/* Backward Button */}
-        <PlayerButton
-          onClickFunction={() => {
-            const audio = audioRef.current;
-            if (audio) {
-              audio.currentTime = Math.max(audio.currentTime - 10, 0);
-            }
-          }}
-          action="backward"
-        />
+  const [showModal, setShowModal] = useState(false);
 
-        {/* Play/Pause Button */}
-        <PlayerButton
-          onClickFunction={() => setIsPlaying(!isPlaying)} // Toggle play/pause
-          action={isPlaying ? "pause" : "play"}
-        />
-
-        {/* Forward Button */}
-        <PlayerButton
-          onClickFunction={() => {
-            const audio = audioRef.current;
-            if (audio) {
-              audio.currentTime = Math.min(
-                audio.currentTime + 10,
-                audio.duration,
-              );
-            }
-          }}
-          action="forward"
-        />
-      </div>
-
-      {/* Seek Bar */}
-      <div className="flex w-full items-center justify-center gap-3">
-        <input
-          type="range"
-          value={!isSeeking ? currTime : newTime}
-          min={0}
-          max={1}
-          step={0.01}
-          className="range-input mix-blend-multiply"
-          onMouseDown={() => setIsSeeking(true)}
-          onMouseUp={(e) => {
-            setIsSeeking(false);
-            updateCurrTime(parseFloat(e.currentTarget.value));
-          }}
-          onChange={(e) => {
-            setNewTime(parseFloat(e.currentTarget.value));
-          }}
-        />
-
-        {/* Current Time Display */}
-        <div className="text-xs">
-          {audioRef.current
-            ? formatDuration(currTime * audioRef.current.duration)
-            : "0:00"}
+  const Modal = () => {
+    return (
+      <div
+        onClick={() => {
+          setShowModal(!showModal);
+        }}
+        className="fixed bottom-0 left-0 right-0 top-0 z-50 flex items-center justify-center bg-gradient-to-b from-teal-950/80 to-blue-950/80 p-4"
+      >
+        <div className="min-h-1/2 relative w-full rounded bg-white px-6 py-12 md:w-1/2">
+          <button
+            className="absolute right-4 top-4 flex aspect-square rounded-full p-3 ring-inset ring-primary-50 transition-all delay-200 hover:ring active:bg-primary-50"
+            onClick={() => {
+              setShowModal(!showModal);
+            }}
+          >
+            <span className="leading-3">✕</span>
+            <span className="sr-only">fermer</span>
+          </button>
+          <div className="mx-auto flex max-w-[65ch] flex-col gap-2 text-lg">
+            <PortableText value={audioDescription} />
+          </div>
         </div>
       </div>
+    );
+  };
 
-      {/* Hidden Audio Element */}
-      <audio
-        ref={audioRef}
-        src={audioUrl}
-        onTimeUpdate={(e) => {
-          const audio = e.currentTarget;
-          if (!isSeeking) {
-            setCurrTime(audio.currentTime / audio.duration);
-          }
-        }}
-        onEnded={() => setIsPlaying(false)}
-      />
-    </div>
+  return (
+    <>
+      {showModal && audioDescription && <Modal />}
+      <div className="flex flex-col items-center">
+        <div className="flex w-full">
+          <div className="ml-8 flex flex-grow items-center justify-center gap-4">
+            {/* Backward Button */}
+            <PlayerButton
+              aria-label="Backward 10 seconds"
+              onClickFunction={() => {
+                const audio = audioRef.current;
+                if (audio) {
+                  audio.currentTime = Math.max(audio.currentTime - 10, 0);
+                }
+              }}
+              action="backward"
+            />
+
+            {/* Play/Pause Button */}
+            <PlayerButton
+              aria-label={isPlaying ? "Pause" : "Play"}
+              onClickFunction={() => setIsPlaying(!isPlaying)} // Toggle play/pause
+              action={isPlaying ? "pause" : "play"}
+            />
+
+            {/* Forward Button */}
+            <PlayerButton
+              aria-label="Forward 10 seconds"
+              onClickFunction={() => {
+                const audio = audioRef.current;
+                if (audio) {
+                  audio.currentTime = Math.min(
+                    audio.currentTime + 10,
+                    audio.duration,
+                  );
+                }
+              }}
+              action="forward"
+            />
+          </div>
+          <div className="group relative ml-auto">
+            <div className="absolute -right-0 -top-10 rounded bg-primary-200 px-2 py-1 text-xs font-bold opacity-0 transition-opacity delay-300 group-hover:opacity-100">
+              Audiodescription
+            </div>
+            <PlayerButton
+              onClickFunction={() => {
+                setShowModal(!showModal);
+              }}
+              action="read"
+            />
+          </div>
+        </div>
+
+        {/* Seek Bar */}
+        <div className="flex w-full items-center justify-center gap-3">
+          <input
+            type="range"
+            value={!isSeeking ? currTime : newTime}
+            min={0}
+            max={1}
+            step={0.01}
+            className="range-input mix-blend-multiply"
+            onMouseDown={() => setIsSeeking(true)}
+            onMouseUp={(e) => {
+              setIsSeeking(false);
+              updateCurrTime(parseFloat(e.currentTarget.value));
+            }}
+            onChange={(e) => {
+              setNewTime(parseFloat(e.currentTarget.value));
+            }}
+          />
+
+          {/* Current Time Display */}
+          <div className="text-xs">
+            {audioRef.current
+              ? formatDuration(currTime * audioRef.current.duration)
+              : "0:00"}
+          </div>
+        </div>
+
+        {/* Hidden Audio Element */}
+        <audio
+          ref={audioRef}
+          src={audioUrl}
+          onTimeUpdate={(e) => {
+            const audio = e.currentTarget;
+            if (!isSeeking) {
+              setCurrTime(audio.currentTime / audio.duration);
+            }
+          }}
+          onEnded={() => setIsPlaying(false)}
+        />
+      </div>
+    </>
   );
 };
 

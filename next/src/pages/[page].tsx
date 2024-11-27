@@ -24,15 +24,26 @@ function Page({
   const isServicePage =
     currentPage._id === "a4781abc-b2bc-43d7-a749-6c392cec5612";
   const isFAQPage = currentPage._id === "dde666c8-4c23-4217-b93d-a669dd92acce";
-  console.log("currentPage._id :", currentPage._id);
-  console.log("isFAQPage :", isFAQPage);
+  const formatSwissPhoneNumber = (phoneNumber: string) => {
+    const match = phoneNumber?.match(/^(\+41)(\d{2})(\d{3})(\d{2})(\d{2})$/);
+    if (!match) return phoneNumber;
+    const [, countryCode, areaCode, part1, part2, part3] = match;
+    return `${countryCode} (0) ${areaCode} ${part1} ${part2} ${part3}`;
+  };
+  const formattedPhone = userProfile.contactDetails?.telephone
+    ? formatSwissPhoneNumber(userProfile.contactDetails.telephone)
+    : "";
   const TextSection: React.FC<{ item: TextSection }> = ({ item }) => {
     return (
       <div
         key={item._key}
         className={`flex w-fit flex-col gap-2 ${item.isBannered ? "rounded bg-gradient-to-b from-primary-100 to-primary-200 px-8 py-8 md:px-12" : ""}`}
       >
-        {item.title && <h2 className="text-2xl">{item.title[lang]}</h2>}
+        {item.title && (
+          <h2 className={`text-2xl ${lang === "en" && "capitalize"}`}>
+            {item.title[lang]}
+          </h2>
+        )}
         <div className="flex flex-col gap-1">
           <PortableText value={item.text[lang]} />
         </div>
@@ -48,6 +59,40 @@ function Page({
           width={500}
           height={600}
         />
+      </div>
+    );
+  };
+  const ButtonSection: React.FC<{ item: any }> = ({ item }) => {
+    return (
+      <div className="flex flex-col gap-3">
+        {item.title && item.title[lang] && (
+          <h2 className="text-2xl">{item.title[lang]}</h2>
+        )}
+        <div className="flex flex-wrap gap-3">
+          {item &&
+            item.buttons &&
+            item.buttons.map((button: any) => {
+              return (
+                <LinkButton
+                  key={button._key}
+                  href={
+                    button.type === "url"
+                      ? button.href
+                      : button.type === "email"
+                        ? "mailto:" + userProfile.contactDetails?.email
+                        : "tel:" + userProfile.contactDetails?.telephone
+                  }
+                  level={button.level}
+                >
+                  {button.label[lang]}{" "}
+                  {button.type === "email" && (
+                    <span>— {userProfile.contactDetails?.email}</span>
+                  )}
+                  {button.type === "tel" && <span>— {formattedPhone}</span>}
+                </LinkButton>
+              );
+            })}
+        </div>
       </div>
     );
   };
@@ -68,7 +113,11 @@ function Page({
                 {currentPage.name[lang]}
               </p>
             )}{" "}
-            <h1 className="text-4xl md:text-5xl">{currentPage.title[lang]}</h1>
+            <h1
+              className={`text-4xl md:text-5xl ${lang === "en" && "capitalize"}`}
+            >
+              {currentPage.title[lang]}
+            </h1>
             {currentPage.subtitle && (
               <p className="text-lg">{currentPage.subtitle[lang]}</p>
             )}
@@ -85,19 +134,7 @@ function Page({
                       return <TextSection key={item._key} item={item} />;
 
                     case "linkButton":
-                      return (
-                        <LinkButton
-                          key={item._key}
-                          href={
-                            item.type === "url"
-                              ? item.href
-                              : "mailto:" + userProfile.contactDetails?.email
-                          }
-                          level={item.level}
-                        >
-                          {item.label[lang]}
-                        </LinkButton>
-                      );
+                      return <ButtonSection key={item._key} item={item} />;
 
                     case "imageSection":
                       return <ImageSection key={item._key} item={item} />;

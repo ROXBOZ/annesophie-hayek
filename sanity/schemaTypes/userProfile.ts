@@ -22,7 +22,7 @@ export default defineType({
       name: 'titles',
       title: 'Titres',
       type: 'array',
-      of: [{type: 'string'}],
+      of: [{type: 'langString'}],
     }),
     defineField({
       name: 'contactDetails',

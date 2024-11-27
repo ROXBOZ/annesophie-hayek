@@ -6,6 +6,13 @@ export default defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'isBannered',
+      title: 'Est en bannière',
+      type: 'boolean',
+      validation: (Rule: any) => Rule.required(),
+      initialValue: false,
+    }),
+    defineField({
       name: 'title',
       title: 'Title',
       type: 'langString',
@@ -15,13 +22,6 @@ export default defineType({
       title: 'Texte',
       type: 'langBlock',
       validation: (Rule: any) => Rule.required(),
-    }),
-    defineField({
-      name: 'isBannered',
-      title: 'Est en bannière',
-      type: 'boolean',
-      validation: (Rule: any) => Rule.required(),
-      initialValue: false,
     }),
   ],
   preview: {

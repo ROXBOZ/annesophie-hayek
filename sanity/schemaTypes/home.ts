@@ -38,6 +38,11 @@ export default defineType({
       type: 'file',
     }),
     defineField({
+      name: 'audioDescription',
+      title: 'Audio Description',
+      type: 'blockContent',
+    }),
+    defineField({
       name: 'seo',
       title: 'SEO',
       type: 'object',

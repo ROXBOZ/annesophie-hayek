@@ -56,8 +56,7 @@ function Header({
     return (
       <nav className="md:hidden">
         <button
-          style={{ zIndex: "9999" }}
-          className={`relative m-0 flex size-8 flex-col items-center justify-center gap-1 border-none p-0 *:flex *:h-[2px] *:w-6 *:rounded *:bg-primary-500 hover:bg-transparent md:right-auto`}
+          className={`relative z-50 m-0 flex size-8 flex-col items-center justify-center gap-1 border-none p-0 *:flex *:h-[2px] *:w-6 *:rounded *:bg-primary-500 hover:bg-transparent md:right-auto`}
           onClick={() => {
             setIsChecked((prev) => !prev);
           }}

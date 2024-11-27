@@ -50,9 +50,11 @@ function Footer({
         <div className="flex w-full flex-col justify-between gap-3 divide-y divide-primary-700/50 md:flex-row md:divide-x md:divide-y-0">
           <Section title={userProfile.name}>
             {userProfile.titles &&
-              userProfile.titles.map((title, index) => (
-                <p key={index}>{title}</p>
-              ))}
+              userProfile.titles.map(
+                (title: { fr: string; en: string }, index: number) => (
+                  <p key={index}>{title[lang]}</p>
+                ),
+              )}
           </Section>
 
           <Section
@@ -63,14 +65,17 @@ function Footer({
             <div className="flex h-full flex-col justify-between">
               {contactDetails?.telephone && (
                 <div>
-                  <CustomLink
-                    href={`tel:${contactDetails.telephone} `}
-                    isExternal={true}
-                    arrow={false}
-                    lang={lang}
-                  >
-                    {formattedPhone}
-                  </CustomLink>
+                  <div className="sm:hidden">
+                    <CustomLink
+                      href={`tel:${contactDetails.telephone} `}
+                      isExternal={true}
+                      arrow={false}
+                      lang={lang}
+                    >
+                      {formattedPhone}
+                    </CustomLink>
+                  </div>
+                  <span className="hidden sm:flex">{formattedPhone}</span>
                   <span>
                     ({lang === "fr" ? "appels uniquement" : "calls only"})
                   </span>
@@ -134,7 +139,8 @@ function Footer({
         <div className="mt-24 flex flex-col gap-6 md:mx-auto">
           <div className="flex justify-normal gap-3 divide-x divide-primary-700/50 text-xs">
             <div>
-              ©{currentYear}, {userProfile.name}. Website by{" "}
+              ©{currentYear}, {userProfile.name}.{" "}
+              {lang === "fr" ? "Site web par" : "Website by"}{" "}
               <Link
                 className="border-none font-semibold"
                 href="/"

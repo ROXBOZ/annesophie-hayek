@@ -22,7 +22,6 @@ export default function Home({
   const servicePageSlug = menus.headerMenu.find(
     (page) => page._id === "a4781abc-b2bc-43d7-a749-6c392cec5612",
   )?.slug[lang].current;
-
   const MediaContent = () => {
     return (
       <>
@@ -32,7 +31,12 @@ export default function Home({
           width={1000}
           height={1000}
         />
-        {lang === "fr" && <AudioPlayer audioUrl={home.audio.asset.url} />}
+        {lang === "fr" && (
+          <AudioPlayer
+            audioDescription={home.audioDescription}
+            audioUrl={home.audio.asset.url}
+          />
+        )}
       </>
     );
   };
@@ -49,7 +53,9 @@ export default function Home({
           {/* Text Column */}
           <div className="flex flex-1 flex-col gap-6">
             <div className="flex flex-col gap-3 pb-6">
-              <h1 className="flex text-5xl">{home.title[lang]}</h1>
+              <h1 className={`flex text-5xl ${lang === "en" && "capitalize"}`}>
+                {home.title[lang]}
+              </h1>
               {home.subtitle && home.subtitle[lang] && (
                 <p className="text-xl">{home.subtitle[lang]}</p>
               )}
@@ -83,7 +89,7 @@ export const getStaticProps = async () => {
       '*[_type == "userProfile"][0]{name, logo {..., asset->{..., metadata{lqip}}}, titles, contactDetails}',
     );
     const home: Home = await client.fetch(
-      '*[_type == "home"][0]{title, subtitle, text, image{..., asset->{...,metadata {lqip}}}, video{asset->}, audio{asset->}, seo}',
+      '*[_type == "home"][0]{title, subtitle, text, image{..., asset->{...,metadata {lqip}}}, video{asset->}, audio{asset->}, audioDescription, seo}',
     );
 
     const menus: Menus = await client.fetch(

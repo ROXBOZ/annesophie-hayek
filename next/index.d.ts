@@ -8,16 +8,16 @@ interface Image {
 
 interface User {
   name: string;
-  titles: string[];
+  titles: { fr: string; en: string }[];
   contactDetails: {
-    telephone?: string;
-    email?: string;
-    sessionLink?: url;
     address?: {
       street: string;
       city: string;
-      googleMapsLink: url;
+      googleMapsLink?: string;
     };
+    telephone?: string;
+    email?: string;
+    sessionLink?: string;
   };
   logo: Image;
 }
@@ -39,6 +39,7 @@ interface Home {
   audio: {
     asset: { url: string; size: number };
   };
+  audioDescription: any;
   video: {
     asset: {
       url: string;
