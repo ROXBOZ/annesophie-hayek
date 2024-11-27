@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import Image from "next/image";
 import { PortableText } from "@portabletext/react";
+import { a } from "framer-motion/client";
 
 const AudioPlayer = ({
   audioUrl,
@@ -18,18 +19,17 @@ const AudioPlayer = ({
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // Play or pause audio based on isPlaying state
   useEffect(() => {
     const audio = audioRef.current;
     if (audio) {
       if (isPlaying) {
-        audio.play(); // Play audio if isPlaying is true
+        audio.play();
       } else {
-        audio.pause(); // Pause audio if isPlaying is false
+        audio.pause();
       }
     }
   }, [isPlaying]);
-  // Function to update audio current time when seek bar is adjusted
+
   const updateCurrTime = useCallback((value: number) => {
     const audio = audioRef.current;
     if (audio) {
@@ -37,14 +37,12 @@ const AudioPlayer = ({
     }
   }, []);
 
-  // Format audio duration into "minutes:seconds"
   const formatDuration = (durationInSeconds: number) => {
     const minutes = Math.floor(durationInSeconds / 60);
     const seconds = Math.floor(durationInSeconds % 60);
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
 
-  // Handlers for backward and forward buttons
   const handleBackward = useCallback(() => {
     const audio = audioRef.current;
     if (audio) {
@@ -59,12 +57,10 @@ const AudioPlayer = ({
     }
   }, []);
 
-  // Play/Pause toggle handler
   const togglePlayPause = useCallback(() => {
     setIsPlaying((prev) => !prev);
   }, []);
 
-  // Modal component for audio description
   const Modal = () => {
     const modalRef = useRef<HTMLDivElement | null>(null);
 
