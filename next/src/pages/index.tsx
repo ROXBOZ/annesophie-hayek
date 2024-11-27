@@ -5,6 +5,7 @@ import { LinkButton } from "@/components/UI/LinkButton";
 import { PortableText } from "@portabletext/react";
 import { SanityImage } from "@/components/SanityImage";
 import { client } from "../../config/sanity";
+import { useAnimateElements } from "@/lib/gsap";
 import { useRouter } from "next/router";
 
 export default function Home({
@@ -16,6 +17,7 @@ export default function Home({
   home: Home;
   menus: Menus;
 }) {
+  useAnimateElements();
   const { locale } = useRouter();
   const lang: "en" | "fr" = (locale ?? "fr") as "en" | "fr";
 
@@ -25,12 +27,14 @@ export default function Home({
   const MediaContent = () => {
     return (
       <>
-        <SanityImage
-          image={home.image}
-          alt="Anne-Sophie Hayek"
-          width={1000}
-          height={1000}
-        />
+        <div className="anim-gif">
+          <SanityImage
+            image={home.image}
+            alt="Anne-Sophie Hayek"
+            width={1000}
+            height={1000}
+          />
+        </div>
         {lang === "fr" && (
           <AudioPlayer
             audioDescription={home.audioDescription}
@@ -47,34 +51,41 @@ export default function Home({
       <Layout lang={lang} userProfile={userProfile} menus={menus}>
         <div className="h-min-screen flex flex-col items-center gap-24 md:flex-row md:gap-12">
           {/* Media Column */}
-          <div className="hidden flex-1 flex-col gap-2 overflow-hidden md:flex">
+          <div className="hidden flex-1 flex-col gap-2 md:flex">
             <MediaContent />
           </div>
           {/* Text Column */}
           <div className="flex flex-1 flex-col gap-6">
-            <div className="flex flex-col gap-3 pb-6">
-              <h1 className={`flex text-5xl ${lang === "en" && "capitalize"}`}>
+            <div className="mb-3 flex flex-col gap-3">
+              <h1
+                className={`anim-el flex text-5xl ${lang === "en" && "capitalize"}`}
+              >
                 {home.title[lang]}
               </h1>
               {home.subtitle && home.subtitle[lang] && (
-                <p className="text-xl">{home.subtitle[lang]}</p>
+                <p className="anim-el text-xl">{home.subtitle[lang]}</p>
               )}
             </div>
-            <div className="flex flex-1 flex-col gap-2 overflow-hidden md:hidden">
+            <div className="flex flex-1 flex-col gap-2 md:hidden">
               <MediaContent />
             </div>
-            <div className="flex flex-col gap-1">
+            <div className="anim-el-wrapper flex flex-col gap-1">
               <PortableText value={home.text[lang]} />
             </div>
             <div className="flex items-center gap-3">
-              <LinkButton level="primary" href={`${lang}/${servicePageSlug}`}>
-                {lang === "fr"
-                  ? "À propos des séances"
-                  : "Learn about sessions"}
-              </LinkButton>
-              <LinkButton href="#contact" level="secondary">
-                {lang === "fr" ? "Me contacter" : "Get in touch"}
-              </LinkButton>
+              <div className="anim-el">
+                <LinkButton level="primary" href={`${lang}/${servicePageSlug}`}>
+                  {lang === "fr"
+                    ? "À propos des séances"
+                    : "Learn about sessions"}
+                </LinkButton>
+              </div>
+
+              <div className="anim el">
+                <LinkButton href="#contact" level="secondary">
+                  {lang === "fr" ? "Me contacter" : "Get in touch"}
+                </LinkButton>
+              </div>
             </div>
           </div>
         </div>

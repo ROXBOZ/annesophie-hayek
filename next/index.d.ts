@@ -110,10 +110,16 @@ interface ImageSection {
 }
 
 interface ButtonSection {
-  _type: "buttonSection";
+  _type: "linkButton";
   _key: string;
-  title: { fr: string; en: string };
-  buttons: LinkButton[];
+  title?: { fr: string; en: string };
+  buttons?: {
+    _key: string;
+    label: { fr: string; en: string };
+    type: "url" | "email" | "tel";
+    href: string;
+    level: "primary" | "secondary" | "tertiary";
+  }[];
 }
 
 interface LinkButton {
@@ -133,6 +139,6 @@ interface FAQ {
 }
 
 interface TypedObject {
-  _type: string; // For example, 'block', 'image', etc.
-  [key: string]: any; // This allows for any additional fields you may need for the content.
+  _type: string;
+  [key: string]: any;
 }

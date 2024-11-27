@@ -69,8 +69,7 @@ function Page({
           <h2 className="text-2xl">{item.title[lang]}</h2>
         )}
         <div className="flex flex-wrap items-baseline gap-3">
-          {item &&
-            item.buttons &&
+          {item.buttons &&
             item.buttons.map((button) => {
               return (
                 <LinkButton
@@ -129,11 +128,12 @@ function Page({
             <div className="mt-16 flex flex-col gap-12">
               {currentPage.content &&
                 currentPage.content.map((item) => {
+                  console.log("item._type :", item._type);
                   switch (item._type) {
                     case "textSection":
                       return <TextSection key={item._key} item={item} />;
 
-                    case "buttonSection":
+                    case "linkButton":
                       return <ButtonSection key={item._key} item={item} />;
 
                     case "imageSection":

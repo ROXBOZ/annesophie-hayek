@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import Image from "next/image";
 import { PortableText } from "@portabletext/react";
+import { useAnimateElements } from "@/lib/gsap";
 
 const AudioPlayer = ({
   audioUrl,
@@ -10,6 +11,7 @@ const AudioPlayer = ({
   audioUrl: string;
   audioDescription: TypedObject | TypedObject[];
 }) => {
+  useAnimateElements();
   const [isPlaying, setIsPlaying] = useState(false);
   const [currTime, setCurrTime] = useState(0);
   const [newTime, setNewTime] = useState(0);
@@ -121,7 +123,7 @@ const AudioPlayer = ({
     return (
       <button
         onClick={onClickFunction}
-        className={`flex aspect-square h-auto rounded-full p-2 outline-teal-500 ring-inset hover:ring hover:transition-all hover:delay-200 focus:outline-4 ${
+        className={`anim-el flex aspect-square h-auto rounded-full p-2 outline-teal-500 ring-inset hover:ring hover:transition-all hover:delay-200 focus:outline-4 ${
           isActive
             ? "bg-primary-300 ring-primary-400"
             : "bg-primary-200 ring-primary-300"
@@ -182,7 +184,7 @@ const AudioPlayer = ({
             min={0}
             max={1}
             step={0.01}
-            className="range-input mix-blend-multiply"
+            className="anim-el range-input mix-blend-multiply"
             onMouseDown={() => setIsSeeking(true)}
             onMouseUp={(e) => {
               setIsSeeking(false);
@@ -192,7 +194,7 @@ const AudioPlayer = ({
               setNewTime(parseFloat(e.currentTarget.value));
             }}
           />
-          <div className="text-xs">
+          <div className="anim-el text-xs">
             {audioRef.current
               ? formatDuration(currTime * audioRef.current.duration)
               : "0:00"}

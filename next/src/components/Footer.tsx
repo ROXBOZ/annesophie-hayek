@@ -47,7 +47,7 @@ function Footer({
       className="mt-12 bg-primary-600 pb-2 pt-6 text-primary-50"
     >
       <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-3 px-4 md:px-6 xl:px-0">
-        <div className="flex w-full flex-col justify-between gap-3 divide-y divide-primary-700/50 md:flex-row md:divide-x md:divide-y-0">
+        <div className="flex w-full flex-col justify-between gap-3 divide-y divide-primary-700/80 md:flex-row md:divide-x md:divide-y-0">
           <Section title={userProfile.name}>
             {userProfile.titles &&
               userProfile.titles.map(
@@ -137,7 +137,7 @@ function Footer({
         </div>
 
         <div className="mt-24 flex flex-col gap-6 md:mx-auto">
-          <div className="flex justify-normal gap-3 divide-x divide-primary-700/50 text-xs">
+          <div className="flex justify-normal gap-3 divide-x divide-primary-700/80 text-xs">
             <div>
               ©{currentYear}, {userProfile.name}.{" "}
               {lang === "fr" ? "Site web par" : "Website by"}{" "}
@@ -155,12 +155,12 @@ function Footer({
               </Link>
               .
             </div>{" "}
-            <div className="ml-3 flex divide-x divide-primary-700/50">
+            <div className="flex divide-x divide-primary-700/80">
               {menu &&
                 menu.map((page: Menu, index: number) => (
                   <Link
                     href={page.slug[lang].current}
-                    className="mx-3 font-bold first:pl-0 focus:outline-none focus:ring-2 focus:ring-primary-300"
+                    className="mx-3 pl-3 font-bold first:pl-0 focus:outline-none focus:ring-2 focus:ring-primary-300"
                     key={index}
                   >
                     {page.name[lang]}
