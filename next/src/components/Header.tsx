@@ -71,7 +71,7 @@ function Header({
           <span className={` ${isChecked && "opacity-0"}`} />
         </button>
         {isChecked && (
-          <div className="absolute bottom-0 left-0 right-0 top-0 flex flex-col justify-center gap-3 divide-y divide-primary-300 bg-primary-100 px-12 *:pt-3">
+          <div className="absolute bottom-0 left-0 right-0 top-0 z-20 flex flex-col justify-center gap-3 divide-y divide-primary-300 bg-primary-100 px-12 *:pt-3">
             <Link className={`flex py-1 text-2xl`} href="/">
               Accueil
             </Link>

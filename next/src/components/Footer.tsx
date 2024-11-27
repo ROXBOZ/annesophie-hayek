@@ -137,9 +137,9 @@ function Footer({
         </div>
 
         <div className="mt-24 flex flex-col gap-6 md:mx-auto">
-          <div className="flex justify-normal gap-3 divide-x divide-primary-700/80 text-xs">
+          <div className="flex flex-col-reverse justify-normal gap-2 text-xs md:flex-row md:gap-3 md:divide-x md:divide-primary-700/80">
             <div>
-              ©{currentYear}, {userProfile.name}.{" "}
+              © 2017-{currentYear}, {userProfile.name}.{" "}
               {lang === "fr" ? "Site web par" : "Website by"}{" "}
               <Link
                 className="border-none font-semibold focus:outline-none focus:ring-2 focus:ring-primary-300"
@@ -160,7 +160,7 @@ function Footer({
                 menu.map((page: Menu, index: number) => (
                   <Link
                     href={page.slug[lang].current}
-                    className="mx-3 pl-3 font-bold first:pl-0 focus:outline-none focus:ring-2 focus:ring-primary-300"
+                    className="pl-3 font-bold first:pl-0 focus:outline-none focus:ring-2 focus:ring-primary-300 md:mx-3"
                     key={index}
                   >
                     {page.name[lang]}

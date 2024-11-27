@@ -17,7 +17,7 @@ html {
 ul {
   @apply my-3;
   li {
-    @apply list-outside list-disc;
+    @apply list-inside list-disc;
   }
   li::marker {
     @apply text-primary-700;
