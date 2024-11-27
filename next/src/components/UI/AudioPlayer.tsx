@@ -2,7 +2,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import Image from "next/image";
 import { PortableText } from "@portabletext/react";
-import { a } from "framer-motion/client";
 
 const AudioPlayer = ({
   audioUrl,
