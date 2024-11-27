@@ -68,7 +68,7 @@ function Page({
         {item.title && item.title[lang] && (
           <h2 className="text-2xl">{item.title[lang]}</h2>
         )}
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap items-baseline gap-3">
           {item &&
             item.buttons &&
             item.buttons.map((button: any) => {

@@ -18,7 +18,7 @@ export const CustomLink = ({
 
   return (
     <Link
-      className="flex w-fit gap-1 border-b border-primary-400 font-semibold transition-all duration-500 hover:border-transparent active:text-primary-200"
+      className="flex w-fit gap-1 border-b border-primary-400 font-semibold hover:border-transparent hover:transition-all hover:duration-500 focus:outline-none focus:ring-2 focus:ring-primary-300 active:text-primary-200"
       href={href}
       target={isExternal ? "_blank" : "_self"}
     >

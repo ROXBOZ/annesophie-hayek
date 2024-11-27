@@ -123,7 +123,7 @@ const AudioPlayer = ({
     return (
       <button
         onClick={onClickFunction}
-        className={`flex aspect-square h-auto rounded-full p-2 ring-inset transition-all delay-200 hover:ring ${
+        className={`flex aspect-square h-auto rounded-full p-2 outline-teal-500 ring-inset hover:ring hover:transition-all hover:delay-200 focus:outline-4 ${
           isActive
             ? "bg-primary-300 ring-primary-400"
             : "bg-primary-200 ring-primary-300"
@@ -164,7 +164,7 @@ const AudioPlayer = ({
               action="forward"
             />
           </div>
-          <div className="group relative ml-auto">
+          <div className="group relative ml-auto mr-1">
             <div className="absolute -right-0 -top-10 rounded bg-primary-200 px-2 py-1 text-xs font-bold opacity-0 transition-opacity delay-300 group-hover:opacity-100">
               Audiodescription
             </div>
@@ -178,6 +178,7 @@ const AudioPlayer = ({
         {/* Seek Bar */}
         <div className="flex w-full items-center justify-center gap-3">
           <input
+            tabIndex={-1}
             type="range"
             value={!isSeeking ? currTime : newTime}
             min={0}

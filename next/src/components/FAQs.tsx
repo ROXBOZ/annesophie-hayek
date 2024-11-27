@@ -22,7 +22,7 @@ function FAQs({ faqs, lang }: { faqs: FAQ[]; lang: "en" | "fr" }) {
                 <div key={index} className="flex w-full flex-col first:pt-0">
                   <button
                     onClick={() => toggleAnswer(index)}
-                    className="flex w-full justify-between"
+                    className="flex w-full justify-between focus:outline-2 focus:outline-teal-500"
                   >
                     <h3
                       className={`pr-4 text-left transition-all delay-100 hover:font-bold ${expandedIndex === index && "font-bold"}`}

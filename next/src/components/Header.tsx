@@ -19,7 +19,10 @@ function Header({
 
   const Logo = () => {
     return (
-      <Link href="/" className="flex h-fit w-52 mix-blend-multiply md:w-64">
+      <Link
+        href="/"
+        className="flex h-fit w-52 mix-blend-multiply outline-offset-4 outline-teal-500 focus:outline-4 md:w-64"
+      >
         <SanityImage
           image={userProfile.logo}
           alt={userProfile.name}
@@ -38,7 +41,7 @@ function Header({
             const isCurrentPage = currentPath === "/" + page.slug[lang].current;
             return (
               <Link
-                className={`flex rounded-full px-4 py-1 font-semibold transition-all delay-200 hover:bg-primary-50 active:bg-primary-100 ${isCurrentPage && "bg-primary-50"}`}
+                className={`flex rounded-full px-4 py-1 font-semibold outline-teal-500 hover:bg-primary-50 hover:transition-all hover:delay-200 focus:outline-4 active:bg-primary-100 ${isCurrentPage && "bg-primary-50"}`}
                 href={page.slug[lang].current}
                 key={index}
               >
@@ -105,7 +108,7 @@ function Header({
     return (
       <a
         href={switchLink}
-        className="flex aspect-square items-center rounded-full bg-primary-200 px-2 font-bold uppercase ring-inset ring-primary-300 transition-all delay-200 hover:ring active:bg-primary-300"
+        className="flex aspect-square items-center rounded-full bg-primary-200 px-2 font-bold uppercase outline-teal-500 ring-inset ring-primary-300 hover:ring hover:transition-all hover:delay-200 focus:outline-4 active:bg-primary-300"
       >
         {lang}
       </a>

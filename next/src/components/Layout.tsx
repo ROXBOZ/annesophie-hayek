@@ -1,6 +1,8 @@
+import React, { useEffect, useRef, useState } from "react";
+
 import Footer from "./Footer";
 import Header from "./Header";
-import React from "react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 function Layout({
@@ -18,8 +20,15 @@ function Layout({
 }) {
   const currentPath = useRouter().pathname;
   const isHomePage = currentPath === "/";
+
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-b from-white to-primary-100 text-primary-950">
+      <Link
+        className="absolute left-[50%] -translate-y-[100%] rounded-none bg-primary-100 p-3 font-bold focus:translate-y-[0%] focus:outline-4 focus:outline-teal-500"
+        href="#main"
+      >
+        {lang === "fr" ? "Passer au contenu" : "Skip to content"}
+      </Link>
       <Header
         slug={slug}
         lang={lang}
@@ -27,7 +36,8 @@ function Layout({
         menu={menus.headerMenu}
       />
       <main
-        className={`h-auto flex-1 py-24 ${isHomePage ? "md:pb-36 md:pt-24" : "md:py-36"} `}
+        id="main"
+        className={`*:e h-auto flex-1 py-24 ${isHomePage ? "md:pb-36 md:pt-24" : "md:py-36"} `}
       >
         <div className="mx-auto w-full max-w-[1200px] px-4 md:px-6 xl:px-0">
           {children}

@@ -142,7 +142,7 @@ function Footer({
               ©{currentYear}, {userProfile.name}.{" "}
               {lang === "fr" ? "Site web par" : "Website by"}{" "}
               <Link
-                className="border-none font-semibold"
+                className="border-none font-semibold focus:outline-none focus:ring-2 focus:ring-primary-300"
                 href="/"
                 target="_blank"
               >
@@ -155,12 +155,12 @@ function Footer({
               </Link>
               .
             </div>{" "}
-            <div className="flex divide-x divide-primary-700/50 pl-3">
+            <div className="ml-3 flex divide-x divide-primary-700/50">
               {menu &&
                 menu.map((page: Menu, index: number) => (
                   <Link
                     href={page.slug[lang].current}
-                    className="px-3 font-bold first:pl-0"
+                    className="mx-3 font-bold first:pl-0 focus:outline-none focus:ring-2 focus:ring-primary-300"
                     key={index}
                   >
                     {page.name[lang]}
