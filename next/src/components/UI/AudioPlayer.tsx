@@ -101,8 +101,8 @@ const AudioPlayer = ({
             <span className="leading-3">✕</span>
             <span className="sr-only">fermer</span>
           </button>
-          <div className="mx-auto flex max-w-[65ch] flex-col gap-2">
-            <h2 className="pb-3 text-3xl">Audiodescription</h2>
+          <div className="mx-auto flex max-w-[65ch] flex-col gap-1">
+            <h2 className="text-2xl">Audiodescription</h2>
             <PortableText value={audioDescription} />
           </div>
         </div>
