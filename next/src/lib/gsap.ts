@@ -3,20 +3,46 @@ import { useEffect } from "react";
 
 export const useAnimateElements = () => {
   useEffect(() => {
-    gsap.fromTo(
+    const elements = document.querySelectorAll(
       ".anim-gif, .anim-el, .anim-el-wrapper > *",
-      {
-        opacity: 0,
-        filter: "blur(5px)",
+    );
+
+    const observer = new IntersectionObserver(
+      (entries, observerInstance) => {
+        const inViewElements = entries
+          .filter((entry) => entry.isIntersecting)
+          .map((entry) => entry.target);
+
+        if (inViewElements.length > 0) {
+          gsap.fromTo(
+            inViewElements,
+            {
+              opacity: 0,
+            },
+            {
+              opacity: 1,
+              duration: 1,
+              stagger: 0.1,
+              ease: "accelerate",
+            },
+          );
+
+          inViewElements.forEach((element) => {
+            observerInstance.unobserve(element);
+          });
+        }
       },
       {
-        backgroundColor: "red",
-        opacity: 1,
-        filter: "blur(0px)",
-        duration: 0.75,
-        ease: "accelerate",
-        stagger: 0.1,
+        threshold: 0.25,
       },
     );
+
+    elements.forEach((element) => {
+      observer.observe(element);
+    });
+
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 };
