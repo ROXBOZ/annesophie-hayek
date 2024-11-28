@@ -35,7 +35,7 @@ function Footer({
     title: string;
     children: React.ReactNode;
   }) => (
-    <div className="flex h-auto flex-1 flex-col gap-1 pt-3 first:pt-0 md:pl-3 md:pt-0 md:first:pl-0">
+    <div className="anim-el flex h-auto flex-1 flex-col gap-1 pt-3 first:pt-0 md:pl-3 md:pt-0 md:first:pl-0">
       <h2 className="font-semibold">{title}</h2>
       <div className="h-full max-w-[50ch]">{children}</div>
     </div>
@@ -137,7 +137,7 @@ function Footer({
         </div>
 
         <div className="mt-24 flex flex-col gap-6 md:mx-auto">
-          <div className="flex flex-col-reverse justify-normal gap-2 text-xs md:flex-row md:gap-3 md:divide-x md:divide-primary-700/80">
+          <div className="anim-el flex flex-col-reverse justify-normal gap-2 text-xs md:flex-row md:gap-3 md:divide-x md:divide-primary-700/80">
             <div>
               © 2017-{currentYear}, {userProfile.name}.{" "}
               {lang === "fr" ? "Site web par" : "Website by"}{" "}
@@ -160,7 +160,7 @@ function Footer({
                 menu.map((page: Menu, index: number) => (
                   <Link
                     href={page.slug[lang].current}
-                    className="pl-3 font-bold first:pl-0 focus:outline-none focus:ring-2 focus:ring-primary-300 md:mx-3"
+                    className="anim-el pl-3 font-bold first:pl-0 focus:outline-none focus:ring-2 focus:ring-primary-300 md:mx-3"
                     key={index}
                   >
                     {page.name[lang]}

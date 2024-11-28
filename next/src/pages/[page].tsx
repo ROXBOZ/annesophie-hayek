@@ -34,32 +34,11 @@ function Page({
     ? formatSwissPhoneNumber(userProfile.contactDetails.telephone)
     : "";
 
-  // const [isTransitioning, setIsTransitioning] = useState(false);
-  // const router = useRouter();
-
-  // useEffect(() => {
-  //   const handleRouteChangeStart = () => {
-  //     setIsTransitioning(true);
-  //   };
-
-  //   const handleRouteChangeComplete = () => {
-  //     setIsTransitioning(false);
-  //   };
-
-  //   router.events.on("routeChangeStart", handleRouteChangeStart);
-  //   router.events.on("routeChangeComplete", handleRouteChangeComplete);
-
-  //   return () => {
-  //     router.events.off("routeChangeStart", handleRouteChangeStart);
-  //     router.events.off("routeChangeComplete", handleRouteChangeComplete);
-  //   };
-  // }, [router]);
-
   const TextSection: React.FC<{ item: TextSection }> = ({ item }) => {
     return (
       <div
         key={item._key}
-        className={`flex w-fit flex-col gap-2 ${item.isBannered ? "rounded-xl bg-gradient-to-t from-primary-100 via-primary-50 to-primary-200 px-8 py-8 md:px-12" : ""}`}
+        className={`anim-el flex w-fit flex-col gap-2 ${item.isBannered ? "rounded-xl bg-gradient-to-t from-primary-100 via-primary-50 to-primary-200 px-8 py-8 md:px-12" : ""}`}
       >
         {item.title && (
           <h2 className={`text-2xl ${lang === "en" && "capitalize"}`}>
@@ -74,7 +53,7 @@ function Page({
   };
   const ImageSection: React.FC<{ item: ImageSection }> = ({ item }) => {
     return (
-      <div className="mix-blend-multiply">
+      <div className="anim-el mix-blend-multiply">
         <SanityImage
           image={item.image}
           alt={item.alt[lang]}
@@ -88,7 +67,7 @@ function Page({
     return (
       <div className="flex flex-col gap-3">
         {item.title && item.title[lang] && (
-          <h2 className="text-2xl">{item.title[lang]}</h2>
+          <h2 className="anim-el text-2xl">{item.title[lang]}</h2>
         )}
         <div className="flex flex-wrap items-baseline gap-3">
           {item.buttons &&
@@ -120,21 +99,6 @@ function Page({
 
   return (
     <>
-      {/* <AnimatePresence>
-        {isTransitioning && (
-          <motion.div
-            className="absolute left-1/2 top-1/2 z-50 h-10 w-10 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-t from-teal-200 to-blue-200 mix-blend-multiply"
-            initial={{ scale: 0 }}
-            animate={{ scale: 500 }}
-            exit={{ scale: 0 }}
-            transition={{
-              duration: 1,
-              ease: "easeInOut",
-            }}
-          />
-        )}
-      </AnimatePresence> */}
-
       <CustomHead seo={currentPage.seo} lang={lang} />
       <Layout
         slug={currentPage.slug}
@@ -145,17 +109,17 @@ function Page({
         <div className="mx-auto flex max-w-[75ch] flex-col">
           <div className="flex flex-col gap-3">
             {currentPage.name[lang] !== currentPage.title[lang] && (
-              <p className="text-sm font-bold uppercase tracking-widest text-primary-700">
+              <p className="anim-el text-sm font-bold uppercase tracking-widest text-primary-700">
                 {currentPage.name[lang]}
               </p>
             )}{" "}
             <h1
-              className={`text-4xl md:text-5xl ${lang === "en" && "capitalize"}`}
+              className={`anim-el text-4xl md:text-5xl ${lang === "en" && "capitalize"}`}
             >
               {currentPage.title[lang]}
             </h1>
             {currentPage.subtitle && (
-              <p className="text-lg">{currentPage.subtitle[lang]}</p>
+              <p className="anim-el text-lg">{currentPage.subtitle[lang]}</p>
             )}
           </div>
 
