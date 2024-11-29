@@ -38,7 +38,7 @@ function Layout({
         id="main"
         className={`*:e h-auto flex-1 py-24 ${isHomePage ? "md:pb-36 md:pt-24" : "md:py-36"} `}
       >
-        <div className="mx-auto w-full max-w-[1200px] px-4 md:px-6 xl:px-0">
+        <div className="mx-auto w-full px-4 md:px-6 lg:max-w-[1200px] xl:px-0">
           {children}
         </div>
       </main>

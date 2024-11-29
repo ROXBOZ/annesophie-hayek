@@ -1,5 +1,6 @@
 import CustomHead from "@/components/CustomHead";
 import FAQs from "@/components/FAQs";
+import Image from "next/image";
 import Layout from "@/components/Layout";
 import { LinkButton } from "@/components/UI/LinkButton";
 import { PortableText } from "@portabletext/react";
@@ -106,47 +107,59 @@ function Page({
         userProfile={userProfile}
         menus={menus}
       >
-        <div className="mx-auto flex max-w-[75ch] flex-col">
-          <div className="flex flex-col gap-3">
-            {currentPage.name[lang] !== currentPage.title[lang] && (
-              <p className="anim-el text-sm font-bold uppercase tracking-widest text-primary-700">
-                {currentPage.name[lang]}
-              </p>
-            )}{" "}
-            <h1
-              className={`anim-el text-4xl md:text-5xl ${lang === "en" && "capitalize"}`}
-            >
-              {currentPage.title[lang]}
-            </h1>
-            {currentPage.subtitle && (
-              <p className="anim-el text-lg">{currentPage.subtitle[lang]}</p>
-            )}
-          </div>
-
-          {isFAQPage ? (
-            <FAQs faqs={faqs} lang={lang} />
-          ) : (
-            <div className="mt-16 flex flex-col gap-12">
-              {currentPage.content &&
-                currentPage.content.map((item) => {
-                  console.log("item._type :", item._type);
-                  switch (item._type) {
-                    case "textSection":
-                      return <TextSection key={item._key} item={item} />;
-
-                    case "linkButton":
-                      return <ButtonSection key={item._key} item={item} />;
-
-                    case "imageSection":
-                      return <ImageSection key={item._key} item={item} />;
-
-                    default:
-                      return null;
-                  }
-                })}
-            </div>
+        <div
+          className={`${isServicePage && "relative -translate-x-[16%] lg:flex"}`}
+        >
+          {isServicePage && (
+            <Image
+              className="sticky top-12 hidden h-fit max-w-[400px] bg-red-500 lg:flex"
+              src="/seagull.png"
+              width={500}
+              height={500}
+              alt={`${lang === "fr" ? "mouette" : "seagull"}`}
+            />
           )}
-          {isServicePage && <FAQs faqs={faqs} lang={lang} />}
+          <div className="mx-auto flex flex-col lg:max-w-[75ch]">
+            <div className="flex flex-col gap-3">
+              {currentPage.name[lang] !== currentPage.title[lang] && (
+                <p className="anim-el text-sm font-bold uppercase tracking-widest text-primary-700">
+                  {currentPage.name[lang]}
+                </p>
+              )}{" "}
+              <h1
+                className={`anim-el text-4xl md:text-5xl ${lang === "en" && "capitalize"}`}
+              >
+                {currentPage.title[lang]}
+              </h1>
+              {currentPage.subtitle && (
+                <p className="anim-el text-lg">{currentPage.subtitle[lang]}</p>
+              )}
+            </div>
+            {isFAQPage ? (
+              <FAQs faqs={faqs} lang={lang} />
+            ) : (
+              <div className="mt-16 flex flex-col gap-12">
+                {currentPage.content &&
+                  currentPage.content.map((item) => {
+                    console.log("item._type :", item._type);
+                    switch (item._type) {
+                      case "textSection":
+                        return <TextSection key={item._key} item={item} />;
+
+                      case "linkButton":
+                        return <ButtonSection key={item._key} item={item} />;
+
+                      case "imageSection":
+                        return <ImageSection key={item._key} item={item} />;
+
+                      default:
+                        return null;
+                    }
+                  })}
+              </div>
+            )}
+            {isServicePage && <FAQs faqs={faqs} lang={lang} />}
+          </div>
         </div>
       </Layout>
     </>
