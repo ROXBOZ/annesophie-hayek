@@ -18,12 +18,13 @@ function Header({
 }) {
   useAnimateElements();
   const currentPath = useRouter().asPath;
+  const isHomepage = currentPath === "/";
 
   const Logo = () => {
     return (
-      <Link
+      <a
         href="/"
-        className="anim-el flex h-fit w-52 mix-blend-multiply outline-offset-4 outline-teal-500 focus:outline-4 md:w-64"
+        className={`${isHomepage && "anim-el"} flex h-fit w-52 mix-blend-multiply outline-offset-4 outline-teal-500 focus:outline-4 md:w-64`}
       >
         <SanityImage
           image={userProfile.logo}
@@ -31,7 +32,7 @@ function Header({
           width={500}
           height={500}
         />
-      </Link>
+      </a>
     );
   };
 
@@ -43,7 +44,7 @@ function Header({
             const isCurrentPage = currentPath === "/" + page.slug[lang].current;
             return (
               <Link
-                className={`anim-el flex rounded-full px-4 py-1 font-semibold outline-teal-500 hover:bg-primary-50 hover:transition-all hover:delay-200 focus:outline-4 active:bg-primary-100 ${isCurrentPage && "bg-primary-50"}`}
+                className={`${isHomepage && "anim-el"} flex rounded-full px-4 py-1 font-semibold outline-teal-500 hover:bg-primary-50 hover:transition-all hover:delay-200 focus:outline-4 active:bg-primary-100 ${isCurrentPage && "bg-primary-50"}`}
                 href={page.slug[lang].current}
                 key={index}
               >
@@ -110,7 +111,7 @@ function Header({
     return (
       <a
         href={switchLink}
-        className="anim-el flex aspect-square items-center rounded-full bg-primary-200 px-2 font-bold uppercase outline-teal-500 ring-inset ring-primary-300 hover:ring hover:transition-all hover:delay-200 focus:outline-4 active:bg-primary-300"
+        className={`${isHomePage && "anim-el"} flex aspect-square items-center rounded-full bg-primary-200 px-2 font-bold uppercase outline-teal-500 ring-inset ring-primary-300 hover:ring hover:transition-all hover:delay-200 focus:outline-4 active:bg-primary-300`}
       >
         {lang}
       </a>
@@ -118,7 +119,7 @@ function Header({
   };
 
   return (
-    <header className="border-b border-primary-200 py-4">
+    <header className={`border-b border-primary-200 py-4`}>
       <div className="mx-auto flex max-w-[1200px] items-center justify-between px-4 md:px-6 xl:px-0">
         <Logo />
 

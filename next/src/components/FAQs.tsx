@@ -13,7 +13,7 @@ function FAQs({ faqs, lang }: { faqs: FAQ[]; lang: "en" | "fr" }) {
       <h2 className="sr-only">
         {lang === "fr" ? "Questions fréquentes" : "Frequently Asked Questions"}
       </h2>
-      <div className="flex w-full flex-col gap-1 divide-y divide-primary-200 *:pt-1">
+      <div className="flex w-full flex-col gap-1 divide-y divide-primary-300 *:pt-1">
         {faqs &&
           faqs.map(
             (faq: FAQ, index: number) =>

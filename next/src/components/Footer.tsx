@@ -42,10 +42,7 @@ function Footer({
   );
 
   return (
-    <footer
-      id="contact"
-      className="mt-12 bg-primary-600 pb-2 pt-6 text-primary-50"
-    >
+    <footer id="contact" className="bg-primary-700 pb-2 pt-6 text-primary-50">
       <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-3 px-4 md:px-6 xl:px-0">
         <div className="flex w-full flex-col justify-between gap-3 divide-y divide-primary-700/80 md:flex-row md:divide-x md:divide-y-0">
           <Section title={userProfile.name}>

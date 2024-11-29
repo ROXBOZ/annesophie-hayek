@@ -21,7 +21,9 @@ function Layout({
   const isHomePage = currentPath === "/";
 
   return (
-    <div className="flex min-h-screen flex-col bg-gradient-to-b from-white to-primary-100 text-primary-950">
+    <div
+      className={`flex min-h-screen flex-col bg-gradient-to-b from-white to-primary-200 text-primary-950`}
+    >
       <Link
         className="absolute left-[50%] -translate-y-[100%] rounded-none bg-primary-100 p-3 font-bold focus:translate-y-[0%] focus:outline-4 focus:outline-teal-500"
         href="#main"

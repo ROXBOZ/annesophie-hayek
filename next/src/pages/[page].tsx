@@ -7,6 +7,7 @@ import { PortableText } from "@portabletext/react";
 import React from "react";
 import { SanityImage } from "@/components/SanityImage";
 import { client } from "../../config/sanity";
+import { useAnimateElements } from "@/lib/gsap";
 import { useRouter } from "next/router";
 
 function Page({
@@ -20,6 +21,7 @@ function Page({
   currentPage: Page;
   faqs: FAQ[];
 }) {
+  useAnimateElements();
   const { locale } = useRouter();
   const lang: "en" | "fr" = (locale ?? "fr") as "en" | "fr";
   const isServicePage =
@@ -39,14 +41,14 @@ function Page({
     return (
       <div
         key={item._key}
-        className={`flex w-fit flex-col gap-2 ${item.isBannered ? "rounded-xl bg-gradient-to-t from-primary-100 via-primary-50 to-primary-200 px-8 py-8 md:px-12" : ""}`}
+        className={`anim-el flex w-fit flex-col gap-2 ${item.isBannered ? "rounded-xl bg-primary-700 px-8 py-8 text-primary-50 md:px-12" : ""}`}
       >
         {item.title && (
-          <h2 className={`anim-el text-2xl ${lang === "en" && "capitalize"}`}>
+          <h2 className={`text-2xl ${lang === "en" && "capitalize"}`}>
             {item.title[lang]}
           </h2>
         )}
-        <div className="anim-el-wrapper flex flex-col gap-1">
+        <div className="-wrapper flex flex-col gap-1">
           <PortableText value={item.text[lang]} />
         </div>
       </div>
@@ -74,23 +76,25 @@ function Page({
           {item.buttons &&
             item.buttons.map((button) => {
               return (
-                <LinkButton
-                  key={button._key}
-                  href={
-                    button.type === "url"
-                      ? button.href
-                      : button.type === "email"
-                        ? "mailto:" + userProfile.contactDetails?.email
-                        : "tel:" + userProfile.contactDetails?.telephone
-                  }
-                  level={button.level}
-                >
-                  {button.label[lang]}{" "}
-                  {button.type === "email" && (
-                    <span>— {userProfile.contactDetails?.email}</span>
-                  )}
-                  {button.type === "tel" && <span>— {formattedPhone}</span>}
-                </LinkButton>
+                <div className="anim-el">
+                  <LinkButton
+                    key={button._key}
+                    href={
+                      button.type === "url"
+                        ? button.href
+                        : button.type === "email"
+                          ? "mailto:" + userProfile.contactDetails?.email
+                          : "tel:" + userProfile.contactDetails?.telephone
+                    }
+                    level={button.level}
+                  >
+                    {button.label[lang]}{" "}
+                    {button.type === "email" && (
+                      <span>— {userProfile.contactDetails?.email}</span>
+                    )}
+                    {button.type === "tel" && <span>— {formattedPhone}</span>}
+                  </LinkButton>
+                </div>
               );
             })}
         </div>
@@ -108,11 +112,11 @@ function Page({
         menus={menus}
       >
         <div
-          className={`${isServicePage && "relative -translate-x-[16%] lg:flex"}`}
+          className={` ${isServicePage && "lg:relative lg:flex lg:-translate-x-[200px]"}`}
         >
           {isServicePage && (
             <Image
-              className="sticky top-12 hidden h-fit max-w-[400px] bg-red-500 lg:flex"
+              className="anim-el sticky top-12 hidden h-fit w-[400px] lg:flex"
               src="/seagull.png"
               width={500}
               height={500}

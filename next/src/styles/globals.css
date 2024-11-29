@@ -20,6 +20,6 @@ ul {
     @apply list-inside list-disc;
   }
   li::marker {
-    @apply text-primary-700;
+    @apply text-primary-900;
   }
 }
