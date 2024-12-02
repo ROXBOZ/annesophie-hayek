@@ -25,7 +25,7 @@ function Layout({
       className={`flex min-h-screen flex-col bg-gradient-to-b from-white to-primary-200 text-primary-950`}
     >
       <Link
-        className="absolute left-[50%] -translate-y-[100%] rounded-none bg-primary-100 p-3 font-bold focus:translate-y-[0%] focus:outline-4 focus:outline-teal-500"
+        className="absolute left-[50%] -translate-y-[100%] rounded-none bg-primary-100 p-3 font-semibold focus:translate-y-[0%] focus:outline-4 focus:outline-teal-500"
         href="#main"
       >
         {lang === "fr" ? "Passer au contenu" : "Skip to content"}

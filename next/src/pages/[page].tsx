@@ -116,7 +116,7 @@ function Page({
               return (
                 <div
                   key={keyword._key}
-                  className="anim-el rounded-full bg-primary-100 px-4 py-1 font-bold"
+                  className="anim-el rounded-full bg-primary-100 px-4 py-1 font-semibold"
                 >
                   <div>{keyword[lang]}</div>
                 </div>
@@ -151,7 +151,7 @@ function Page({
           <div className="mx-auto flex flex-col lg:max-w-[75ch]">
             <div className="flex flex-col gap-3">
               {currentPage.name[lang] !== currentPage.title[lang] && (
-                <p className="anim-el text-sm font-bold uppercase tracking-widest text-primary-700">
+                <p className="anim-el text-sm font-semibold uppercase tracking-widest text-primary-700">
                   {currentPage.name[lang]}
                 </p>
               )}{" "}

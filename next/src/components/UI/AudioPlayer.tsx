@@ -165,7 +165,7 @@ const AudioPlayer = ({
             />
           </div>
           <div className="group relative ml-auto mr-1">
-            <div className="absolute -right-0 -top-10 rounded bg-primary-200 px-2 py-1 text-xs font-bold opacity-0 transition-opacity delay-300 group-hover:opacity-100">
+            <div className="absolute -right-0 -top-10 rounded bg-primary-200 px-2 py-1 text-xs font-semibold opacity-0 transition-opacity delay-300 group-hover:opacity-100">
               Audiodescription
             </div>
             <PlayerButton

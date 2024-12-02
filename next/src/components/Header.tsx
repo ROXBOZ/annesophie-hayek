@@ -111,7 +111,7 @@ function Header({
     return (
       <a
         href={switchLink}
-        className={`${isHomePage && "anim-el"} flex aspect-square items-center rounded-full bg-primary-200 px-2 font-bold uppercase outline-teal-500 ring-inset ring-primary-300 hover:ring hover:transition-all hover:delay-200 focus:outline-4 active:bg-primary-300`}
+        className={`${isHomePage && "anim-el"} flex aspect-square items-center rounded-full bg-primary-200 px-2 font-semibold uppercase outline-teal-500 ring-inset ring-primary-300 hover:ring hover:transition-all hover:delay-200 focus:outline-4 active:bg-primary-300`}
       >
         {lang}
       </a>
