@@ -76,9 +76,8 @@ function Page({
           {item.buttons &&
             item.buttons.map((button) => {
               return (
-                <div className="anim-el">
+                <div key={button._key} className="anim-el">
                   <LinkButton
-                    key={button._key}
                     href={
                       button.type === "url"
                         ? button.href

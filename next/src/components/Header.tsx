@@ -22,7 +22,7 @@ function Header({
 
   const Logo = () => {
     return (
-      <a
+      <Link
         href="/"
         className={`${isHomepage && "anim-el"} flex h-fit w-52 mix-blend-multiply outline-offset-4 outline-teal-500 focus:outline-4 md:w-64`}
       >
@@ -32,7 +32,7 @@ function Header({
           width={500}
           height={500}
         />
-      </a>
+      </Link>
     );
   };
 
