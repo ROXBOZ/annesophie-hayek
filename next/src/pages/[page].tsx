@@ -70,7 +70,9 @@ function Page({
     return (
       <div className="flex flex-col gap-3">
         {item.title && item.title[lang] && (
-          <h2 className="anim-el text-2xl">{item.title[lang]}</h2>
+          <h2 className={`anim-el text-2xl ${lang === "en" && "capitalize"}`}>
+            {item.title[lang]}
+          </h2>
         )}
         <div className="flex flex-wrap items-baseline gap-6 lg:gap-3">
           {item.buttons &&
@@ -93,6 +95,30 @@ function Page({
                     )}
                     {button.type === "tel" && <span>— {formattedPhone}</span>}
                   </LinkButton>
+                </div>
+              );
+            })}
+        </div>
+      </div>
+    );
+  };
+  const KeywordsSection: React.FC<{ item: KeywordsSection }> = ({ item }) => {
+    return (
+      <div className="flex flex-col gap-3">
+        {item.title && item.title[lang] && (
+          <h2 className={`anim-el text-2xl ${lang === "en" && "capitalize"}`}>
+            {item.title[lang]}
+          </h2>
+        )}
+        <div className="flex w-fit flex-wrap items-baseline gap-3 rounded-xl bg-gradient-to-r from-teal-50 to-blue-50 p-4">
+          {item.keywords &&
+            item.keywords.map((keyword) => {
+              return (
+                <div
+                  key={keyword._key}
+                  className="anim-el rounded-full bg-primary-100 px-4 py-1 font-bold"
+                >
+                  <div>{keyword[lang]}</div>
                 </div>
               );
             })}
@@ -154,6 +180,9 @@ function Page({
 
                       case "imageSection":
                         return <ImageSection key={item._key} item={item} />;
+
+                      case "keywordsSection":
+                        return <KeywordsSection key={item._key} item={item} />;
 
                       default:
                         return null;

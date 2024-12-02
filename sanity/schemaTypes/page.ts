@@ -36,7 +36,12 @@ export default defineType({
       name: 'content',
       title: 'Contenu',
       type: 'array',
-      of: [{type: 'textSection'}, {type: 'linkButton'}, {type: 'imageSection'}],
+      of: [
+        {type: 'textSection'},
+        {type: 'linkButton'},
+        {type: 'imageSection'},
+        {type: 'keywordsSection'},
+      ],
       hidden: ({parent}) => parent?.name?.fr === 'faq' || parent?.name?.fr === 'FAQ',
     }),
 

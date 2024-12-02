@@ -88,7 +88,13 @@ interface Page {
   title: { fr: string; en: string };
   subtitle: { fr: string; en: string };
   slug: { fr: { current: string }; en: { current: string } };
-  content: (TextSection | LinkButton | ImageSection | ButtonSection)[];
+  content: (
+    | TextSection
+    | LinkButton
+    | ImageSection
+    | ButtonSection
+    | KeyWordsSection
+  )[];
   seo: Seo;
 }
 
@@ -141,4 +147,11 @@ interface FAQ {
 interface TypedObject {
   _type: string;
   [key: string]: any;
+}
+
+interface KeywordsSection {
+  _type: "keywordsSection";
+  _key: string;
+  title: { fr: string; en: string };
+  keywords: { _key: string; fr: string; en: string }[];
 }
