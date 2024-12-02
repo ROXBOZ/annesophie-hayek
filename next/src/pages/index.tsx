@@ -49,7 +49,7 @@ export default function Home({
     <>
       <CustomHead seo={home.seo} lang={lang} />
       <Layout lang={lang} userProfile={userProfile} menus={menus}>
-        <div className="h-min-screen flex flex-col items-center gap-24 md:flex-row md:gap-12">
+        <div className="h-min-screen flex flex-col items-center gap-24 md:gap-12 lg:flex-row">
           {/* Media Column */}
           <div className="hidden flex-1 flex-col gap-2 md:flex">
             <MediaContent />

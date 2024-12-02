@@ -11,6 +11,7 @@
 }
 
 html {
+  /* @apply border-8 border-yellow-500 sm:border-orange-500 md:border-red-500 lg:border-purple-500 xl:border-blue-500; */
   font-family: "Source Sans 3";
 }
 
@@ -20,6 +21,6 @@ ul {
     @apply list-inside list-disc;
   }
   li::marker {
-    @apply text-primary-900;
+    @apply text-primary-700;
   }
 }

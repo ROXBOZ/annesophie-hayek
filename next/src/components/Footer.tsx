@@ -35,7 +35,7 @@ function Footer({
     title: string;
     children: React.ReactNode;
   }) => (
-    <div className="anim-el flex h-auto flex-1 flex-col gap-1 pt-3 first:pt-0 md:pl-3 md:pt-0 md:first:pl-0">
+    <div className="anim-el flex h-auto flex-1 flex-col gap-1 pt-3 first:pt-0 md:pt-0 lg:pl-3 lg:first:pl-0">
       <h2 className="font-semibold">{title}</h2>
       <div className="h-full max-w-[50ch]">{children}</div>
     </div>
@@ -43,8 +43,8 @@ function Footer({
 
   return (
     <footer id="contact" className="bg-primary-700 pb-2 pt-6 text-primary-50">
-      <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-3 px-4 md:px-6 xl:px-0">
-        <div className="flex w-full flex-col justify-between gap-3 divide-y divide-primary-700/80 md:flex-row md:divide-x md:divide-y-0">
+      <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-3 px-4 lg:px-6 xl:px-0">
+        <div className="flex w-full flex-col justify-between gap-3 divide-y divide-primary-800 lg:flex-row lg:divide-x lg:divide-y-0">
           <Section title={userProfile.name}>
             {userProfile.titles &&
               userProfile.titles.map(
@@ -134,7 +134,7 @@ function Footer({
         </div>
 
         <div className="mt-24 flex flex-col gap-6 md:mx-auto">
-          <div className="anim-el flex flex-col-reverse justify-normal gap-2 text-xs md:flex-row md:gap-3 md:divide-x md:divide-primary-700/80">
+          <div className="anim-el flex flex-col-reverse justify-normal gap-2 text-xs md:flex-row md:gap-3 md:divide-x md:divide-primary-800">
             <div>
               © 2017-{currentYear}, {userProfile.name}.{" "}
               {lang === "fr" ? "Site web par" : "Website by"}{" "}

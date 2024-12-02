@@ -89,9 +89,9 @@ const AudioPlayer = ({
         tabIndex={0}
         onKeyDown={handleKeyDown}
         onClick={handleBackgroundClick}
-        className="fixed bottom-0 left-0 right-0 top-0 z-50 flex items-center justify-center bg-gradient-to-b from-teal-950/80 to-blue-950/80 p-4"
+        className="fixed bottom-0 left-0 right-0 top-0 z-50 flex justify-center bg-gradient-to-b from-teal-950/80 to-blue-950/80 p-4 lg:items-center"
       >
-        <div className="min-h-1/2 relative w-full rounded-xl bg-white px-12 pb-24 pt-12 md:w-1/2">
+        <div className="min-h-1/2 relative w-full overflow-scroll rounded-xl bg-white px-12 pb-24 pt-12 md:w-1/2">
           <button
             className="absolute right-4 top-4 flex aspect-square rounded-full p-3 ring-inset ring-primary-50 transition-all delay-200 hover:ring active:bg-primary-50"
             onClick={() => {

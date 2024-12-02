@@ -41,7 +41,7 @@ function Page({
     return (
       <div
         key={item._key}
-        className={`anim-el flex w-fit flex-col gap-2 ${item.isBannered ? "rounded-xl bg-primary-700 px-8 py-8 text-primary-50 md:px-12" : ""}`}
+        className={`anim-el flex w-fit flex-col gap-2 ${item.isBannered ? "rounded-xl bg-gradient-to-b from-primary-200 to-primary-100 px-8 py-8 md:px-12" : ""}`}
       >
         {item.title && (
           <h2 className={`text-2xl ${lang === "en" && "capitalize"}`}>
@@ -72,7 +72,7 @@ function Page({
         {item.title && item.title[lang] && (
           <h2 className="anim-el text-2xl">{item.title[lang]}</h2>
         )}
-        <div className="flex flex-wrap items-baseline gap-3">
+        <div className="flex flex-wrap items-baseline gap-6 lg:gap-3">
           {item.buttons &&
             item.buttons.map((button) => {
               return (
