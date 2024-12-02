@@ -93,7 +93,7 @@ const AudioPlayer = ({
       >
         <div className="min-h-1/2 relative w-full overflow-scroll rounded-xl bg-white px-12 pb-24 pt-12 md:w-1/2">
           <button
-            className="absolute right-4 top-4 flex aspect-square rounded-full p-3 ring-inset ring-primary-50 transition-all delay-200 hover:ring active:bg-primary-50"
+            className="fixed right-6 top-6 flex aspect-square rounded-full p-3 ring-inset ring-primary-50 transition-all delay-200 hover:ring active:bg-primary-50 md:absolute"
             onClick={() => {
               setShowModal(false);
             }}
