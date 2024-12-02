@@ -16,9 +16,9 @@ html {
   font-weight: 400;
   font-style: normal; /*to avoid problem with font*/
   .font-semibold {
-    font-style: semibold;
+    font-style: medium;
     font-family: "Source Sans 3";
-    font-weight: 600;
+    font-weight: 500;
   }
 }
 
