@@ -152,7 +152,7 @@ function Footer({
               </Link>
               .
             </div>{" "}
-            <div className="flex divide-x divide-primary-700/80">
+            <div className="flex divide-x divide-primary-800">
               {menu &&
                 menu.map((page: Menu, index: number) => (
                   <Link
