@@ -35,12 +35,11 @@ export default function Home({
             height={1000}
           />
         </div>
-        {lang === "fr" && (
-          <AudioPlayer
-            audioDescription={home.audioDescription}
-            audioUrl={home.audio.asset.url}
-          />
-        )}
+        <AudioPlayer
+          lang={lang}
+          audioDescription={home.audioDescription}
+          audioUrl={home.audio.asset.url}
+        />
       </>
     );
   };

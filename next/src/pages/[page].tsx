@@ -41,7 +41,7 @@ function Page({
     return (
       <div
         key={item._key}
-        className={`anim-el flex w-fit flex-col gap-2 ${item.isBannered ? "rounded-xl bg-gradient-to-b from-primary-200 to-primary-100 px-8 py-8 md:px-12" : ""}`}
+        className={`anim-el flex w-fit flex-col gap-2 ${item.isBannered && "bg-secondary-200 rounded-xl px-8 py-8 md:px-12"}`}
       >
         {item.title && (
           <h2 className={`text-2xl ${lang === "en" && "capitalize"}`}>
@@ -110,13 +110,13 @@ function Page({
             {item.title[lang]}
           </h2>
         )}
-        <div className="flex w-fit flex-wrap items-baseline gap-3 rounded-xl bg-gradient-to-r from-teal-50 to-blue-50 p-4">
+        <div className="flex w-fit flex-wrap items-baseline gap-3">
           {item.keywords &&
             item.keywords.map((keyword) => {
               return (
                 <div
                   key={keyword._key}
-                  className="anim-el rounded-full bg-primary-100 px-4 py-1 font-semibold"
+                  className="anim-el bg-secondary-200 rounded-full px-4 py-1 font-semibold"
                 >
                   <div>{keyword[lang]}</div>
                 </div>

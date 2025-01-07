@@ -7,17 +7,34 @@ export default defineType({
   name: 'page',
   title: 'Page',
   type: 'document',
+  groups: [
+    {
+      name: 'text',
+      title: 'Layout',
+    },
+    {
+      name: 'content',
+      title: 'Contenu',
+    },
+    {
+      name: 'seo',
+      title: 'SEO',
+    },
+  ],
+
   fields: [
     defineField({
       name: 'name',
       title: 'Name',
       type: 'langString',
+      group: 'text',
       validation: (Rule: any) => Rule.required(),
     }),
     defineField({
       title: 'Slug',
       name: 'slug',
       type: 'langSlug',
+      group: 'text',
       validation: (Rule: any) => Rule.required(),
     }),
 
@@ -25,17 +42,20 @@ export default defineType({
       name: 'title',
       title: 'Titre',
       type: 'langString',
+      group: 'text',
       validation: (Rule: any) => Rule.required(),
     }),
     defineField({
       name: 'subtitle',
       title: 'Sous-titre',
       type: 'langText',
+      group: 'text',
     }),
     defineField({
       name: 'content',
       title: 'Contenu',
       type: 'array',
+      group: 'content',
       of: [
         {type: 'textSection'},
         {type: 'linkButton'},
@@ -50,6 +70,7 @@ export default defineType({
       title: 'SEO',
       type: 'object',
       fields: [...seo],
+      group: 'seo',
     }),
   ],
   preview: {

@@ -7,9 +7,14 @@ import { useAnimateElements } from "@/lib/gsap";
 const AudioPlayer = ({
   audioUrl,
   audioDescription,
+  lang,
 }: {
+  lang: "en" | "fr";
   audioUrl: string;
-  audioDescription: TypedObject | TypedObject[];
+  audioDescription: {
+    fr: TypedObject | TypedObject[];
+    en: TypedObject | TypedObject[];
+  };
 }) => {
   useAnimateElements();
   const [isPlaying, setIsPlaying] = useState(false);
@@ -102,8 +107,10 @@ const AudioPlayer = ({
             <span className="sr-only">fermer</span>
           </button>
           <div className="mx-auto flex max-w-[65ch] flex-col gap-1">
-            <h2 className="pb-4 text-2xl">Audiodescription</h2>
-            <PortableText value={audioDescription} />
+            <h2 className="pb-4 text-2xl">
+              {lang === "fr" ? "Description audio" : "Audio Translation"}
+            </h2>
+            <PortableText value={audioDescription[lang]} />
           </div>
         </div>
       </div>
@@ -166,11 +173,11 @@ const AudioPlayer = ({
           </div>
           <div className="group relative ml-auto mr-1">
             <div className="absolute -right-0 -top-10 rounded bg-primary-200 px-2 py-1 text-xs font-semibold opacity-0 transition-opacity delay-300 group-hover:opacity-100">
-              Audiodescription
+              {lang === "fr" ? "Audiodescription" : "Audiotranslation"}
             </div>
             <PlayerButton
               onClickFunction={() => setShowModal((prev) => !prev)}
-              action="read"
+              action={`${lang === "fr" ? "read" : "translation"}`}
             />
           </div>
         </div>

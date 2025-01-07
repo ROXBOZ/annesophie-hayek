@@ -22,7 +22,7 @@ function Layout({
 
   return (
     <div
-      className={`flex min-h-screen flex-col bg-gradient-to-b from-white to-primary-200 text-primary-950`}
+      className={`bg-secondary-50 text-secondary-950 flex min-h-screen flex-col`}
     >
       <Link
         className="absolute left-[50%] -translate-y-[100%] rounded-none bg-primary-100 p-3 font-semibold focus:translate-y-[0%] focus:outline-4 focus:outline-teal-500"
