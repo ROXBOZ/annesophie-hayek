@@ -159,7 +159,7 @@ const AudioPlayer = ({
 
     return (
       <div className="group relative flex justify-center">
-        <div className="absolute -mt-4 hidden whitespace-nowrap rounded-md bg-primary-700 px-2 text-xs font-semibold text-primary-50 group-hover:flex">
+        <div className="absolute -mt-4 hidden whitespace-nowrap rounded-md bg-primary-700 px-2 text-xs font-semibold text-primary-50 md:group-hover:flex">
           {actionLabel}
         </div>
         <button
