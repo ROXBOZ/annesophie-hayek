@@ -2,7 +2,8 @@ import { memo, useCallback, useEffect, useRef, useState } from "react";
 
 import Image from "next/image";
 import { PortableText } from "@portabletext/react";
-import { useAnimateElements } from "@/lib/gsap";
+
+// import { useAnimateElements } from "@/lib/gsap";
 
 const AudioPlayer = ({
   audioUrl,
@@ -16,7 +17,7 @@ const AudioPlayer = ({
     en: TypedObject | TypedObject[];
   };
 }) => {
-  useAnimateElements();
+  // useAnimateElements();
   const [isPlaying, setIsPlaying] = useState(false);
   const [currTime, setCurrTime] = useState(0);
   const [isSeeking, setIsSeeking] = useState(false);
@@ -149,7 +150,7 @@ const AudioPlayer = ({
   return (
     <>
       {showModal && <Modal />}
-      <div className="flex flex-col items-center bg-green-200">
+      <div className="flex flex-col items-center bg-yellow-200">
         <div className="flex w-full">
           <div className="ml-8 flex flex-grow items-center justify-center gap-4">
             <PlayerButton
