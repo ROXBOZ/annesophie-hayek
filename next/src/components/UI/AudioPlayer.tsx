@@ -4,6 +4,16 @@ import Image from "next/image";
 import { PortableText } from "@portabletext/react";
 import { useAnimateElements } from "@/lib/gsap";
 
+type Language = "fr" | "en";
+type Action =
+  | "default"
+  | "backward"
+  | "forward"
+  | "play"
+  | "pause"
+  | "read"
+  | "translation";
+
 const AudioPlayer = ({
   audioUrl,
   audioDescription,
@@ -121,31 +131,61 @@ const AudioPlayer = ({
     isActive = false,
   }: {
     onClickFunction: () => void;
-    action: string;
+    action: Action;
     isActive?: boolean;
-  }) => (
-    <button
-      onClick={onClickFunction}
-      className="group flex size-12 items-center justify-center"
-    >
-      <div
-        className={`flex aspect-square size-8 items-center justify-center rounded-full ${
-          isActive
-            ? "bg-primary-300"
-            : "group-active:primary-300 md:group-active:primary-400 bg-primary-200 group-hover:bg-primary-300"
-        }`}
-      >
-        <Image
-          src={`/SVGs/${action}.svg`}
-          alt={action}
-          width={32}
-          height={32}
-          className="size-[16px] object-contain"
-          priority // Ensures images are preloaded
-        />
+  }) => {
+    const translations: Record<Language, Record<Action, string>> = {
+      fr: {
+        default: "",
+        backward: "Retour 10 sec.",
+        forward: "Avancer 10 sec.",
+        play: "Jouer",
+        pause: "Pause",
+        read: "Transcription",
+        translation: "Traduction",
+      },
+      en: {
+        default: "",
+        backward: "Backward 10 sec.",
+        forward: "Forward 10 sec.",
+        play: "Play",
+        pause: "Pause",
+        read: "Read",
+        translation: "Translation",
+      },
+    };
+
+    const actionLabel = translations[lang][action];
+
+    return (
+      <div className="group relative flex justify-center">
+        <div className="absolute -mt-4 hidden whitespace-nowrap rounded-md bg-primary-700 px-2 text-xs font-semibold text-primary-50 group-hover:flex">
+          {actionLabel}
+        </div>
+        <button
+          onClick={onClickFunction}
+          className="group flex size-12 items-center justify-center"
+        >
+          <div
+            className={`flex aspect-square size-8 items-center justify-center rounded-full ${
+              isActive
+                ? "bg-primary-300"
+                : "group-active:primary-300 md:group-active:primary-400 bg-primary-200 group-hover:bg-primary-300"
+            }`}
+          >
+            <Image
+              src={`/SVGs/${action}.svg`}
+              alt={action}
+              width={32}
+              height={32}
+              className="size-[16px] object-contain"
+              priority
+            />
+          </div>
+        </button>
       </div>
-    </button>
-  );
+    );
+  };
 
   PlayerButton.displayName = "PlayerButton";
 
@@ -172,7 +212,7 @@ const AudioPlayer = ({
               action="forward"
             />
           </div>
-          <div className="group relative ml-auto mr-1">
+          <div className="group relative -mr-2">
             <PlayerButton
               onClickFunction={() => setShowModal((prev) => !prev)}
               action={lang === "fr" ? "read" : "translation"}
