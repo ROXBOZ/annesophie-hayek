@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import Image from "next/image";
 import { PortableText } from "@portabletext/react";
-import { useAnimateElements } from "@/lib/gsap"; // Your custom animation hook
+import { useAnimateElements } from "@/lib/gsap";
 
 const AudioPlayer = ({
   audioUrl,
@@ -18,14 +18,13 @@ const AudioPlayer = ({
 }) => {
   useAnimateElements(); // Keeps your animations functional
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currTime, setCurrTime] = useState(0);
-  const [newTime, setNewTime] = useState(0);
+  const [currTime, setCurrTime] = useState(0); // Tracks progress (0 to 1)
   const [isSeeking, setIsSeeking] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // Handle play/pause
+  // Play/pause logic
   useEffect(() => {
     const audio = audioRef.current;
     if (audio) {
@@ -97,7 +96,7 @@ const AudioPlayer = ({
         onClick={handleBackgroundClick}
         className="fixed bottom-0 left-0 right-0 top-0 z-50 flex justify-center bg-gradient-to-b from-teal-950/80 to-blue-950/80 p-4 lg:items-center"
       >
-        <div className="min-h-1/2 relative w-full overflow-scroll rounded-xl bg-white px-12 pb-24 pt-12 md:w-1/2">
+        <div className="relative min-h-[50vh] w-full overflow-hidden rounded-xl bg-white px-12 pb-24 pt-12 md:w-1/2">
           <button
             className="fixed right-6 top-6 flex aspect-square rounded-full p-3 ring-inset ring-primary-50 transition-all delay-200 hover:ring active:bg-primary-50 md:absolute"
             onClick={() => setShowModal(false)}
@@ -116,7 +115,6 @@ const AudioPlayer = ({
     );
   };
 
-  // Player Button Component
   const PlayerButton = ({
     onClickFunction,
     action,
@@ -149,7 +147,6 @@ const AudioPlayer = ({
       {showModal && <Modal />}
       <div className="flex flex-col items-center">
         <div className="flex w-full">
-          {/* Playback Controls */}
           <div className="ml-8 flex flex-grow items-center justify-center gap-4">
             <PlayerButton
               aria-label="Backward 10 seconds"
@@ -179,9 +176,8 @@ const AudioPlayer = ({
         {/* Seek Bar */}
         <div className="flex w-full items-center justify-center gap-3">
           <input
-            tabIndex={-1}
             type="range"
-            value={!isSeeking ? currTime : newTime}
+            value={currTime}
             min={0}
             max={1}
             step={0.01}
@@ -191,9 +187,7 @@ const AudioPlayer = ({
               setIsSeeking(false);
               updateCurrTime(parseFloat(e.currentTarget.value));
             }}
-            onChange={(e) => {
-              setNewTime(parseFloat(e.currentTarget.value));
-            }}
+            onChange={(e) => setCurrTime(parseFloat(e.currentTarget.value))}
           />
           <div className="anim-el text-xs">
             {audioRef.current
@@ -202,13 +196,12 @@ const AudioPlayer = ({
           </div>
         </div>
 
-        {/* Hidden Audio Element */}
         <audio
           ref={audioRef}
           src={audioUrl}
           onTimeUpdate={(e) => {
-            const audio = e.currentTarget;
             if (!isSeeking) {
+              const audio = e.currentTarget;
               setCurrTime(audio.currentTime / audio.duration);
             }
           }}
