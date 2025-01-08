@@ -149,7 +149,7 @@ const AudioPlayer = ({
   return (
     <>
       {showModal && <Modal />}
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center bg-green-200">
         <div className="flex w-full">
           <div className="ml-8 flex flex-grow items-center justify-center gap-4">
             <PlayerButton
