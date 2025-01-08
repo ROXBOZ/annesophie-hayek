@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useRef, useState } from "react";
 
 import Image from "next/image";
 import { PortableText } from "@portabletext/react";
@@ -115,31 +115,33 @@ const AudioPlayer = ({
     );
   };
 
-  const PlayerButton = ({
-    onClickFunction,
-    action,
-    isActive = false,
-  }: {
-    onClickFunction: () => void;
-    action: string;
-    isActive?: boolean;
-  }) => (
-    <button
-      onClick={onClickFunction}
-      className={`anim-el flex aspect-square h-auto rounded-full p-2 outline-teal-500 ring-inset hover:ring hover:transition-all hover:delay-200 focus:outline-4 ${
-        isActive
-          ? "bg-primary-300 ring-primary-400"
-          : "bg-primary-200 ring-primary-300"
-      }`}
-    >
-      <Image
-        src={`/SVGs/${action}.svg`}
-        alt={action}
-        width={32}
-        height={32}
-        className="h-4 w-4" // Consistent size
-      />
-    </button>
+  const PlayerButton = memo(
+    ({
+      onClickFunction,
+      action,
+      isActive = false,
+    }: {
+      onClickFunction: () => void;
+      action: string;
+      isActive?: boolean;
+    }) => (
+      <button
+        onClick={onClickFunction}
+        className={`anim-el flex aspect-square h-auto rounded-full p-2 outline-teal-500 ring-inset hover:ring hover:transition-all hover:delay-200 focus:outline-4 ${
+          isActive
+            ? "bg-primary-300 ring-primary-400"
+            : "bg-primary-200 ring-primary-300"
+        }`}
+      >
+        <Image
+          src={`/SVGs/${action}.svg`} // Static path
+          alt={action}
+          width={32}
+          height={32}
+          className="h-4 w-4" // Ensure consistent size
+        />
+      </button>
+    ),
   );
 
   return (
