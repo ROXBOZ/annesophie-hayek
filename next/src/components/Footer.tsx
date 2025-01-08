@@ -157,7 +157,7 @@ function Footer({
                 menu.map((page: Menu, index: number) => (
                   <Link
                     href={page.slug[lang].current}
-                    className="anim-el pl-3 font-semibold first:pl-0 focus:outline-none focus:ring-2 focus:ring-primary-300 md:mx-3"
+                    className="anim-el px-2 font-semibold first:pl-0 focus:outline-none focus:ring-2 focus:ring-primary-300 md:mx-3"
                     key={index}
                   >
                     {page.name[lang]}
