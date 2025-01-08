@@ -144,6 +144,8 @@ const AudioPlayer = ({
     ),
   );
 
+  PlayerButton.displayName = "PlayerButton";
+
   return (
     <>
       {showModal && <Modal />}
