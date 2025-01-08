@@ -2,8 +2,7 @@ import { memo, useCallback, useEffect, useRef, useState } from "react";
 
 import Image from "next/image";
 import { PortableText } from "@portabletext/react";
-
-// import { useAnimateElements } from "@/lib/gsap";
+import { useAnimateElements } from "@/lib/gsap";
 
 const AudioPlayer = ({
   audioUrl,
@@ -17,7 +16,7 @@ const AudioPlayer = ({
     en: TypedObject | TypedObject[];
   };
 }) => {
-  // useAnimateElements();
+  useAnimateElements();
   const [isPlaying, setIsPlaying] = useState(false);
   const [currTime, setCurrTime] = useState(0);
   const [isSeeking, setIsSeeking] = useState(false);
@@ -75,7 +74,7 @@ const AudioPlayer = ({
       if (modalRef.current) {
         modalRef.current.focus();
       }
-    }, [isPlaying]);
+    }, []);
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
       if (event.key === "Escape") {
@@ -116,33 +115,30 @@ const AudioPlayer = ({
     );
   };
 
-  const PlayerButton = memo(
-    ({
-      onClickFunction,
-      action,
-      isActive = false,
-    }: {
-      onClickFunction: () => void;
-      action: string;
-      isActive?: boolean;
-    }) => (
-      <button
-        onClick={onClickFunction}
-        className={`flex aspect-square h-auto rounded-full p-2 outline-teal-500 ring-inset hover:ring focus:outline-4 ${
-          isActive
-            ? "bg-primary-300 ring-primary-400"
-            : "bg-primary-200 ring-primary-300"
-        }`}
-      >
-        <Image
-          src={`/SVGs/${action}.svg`} // Static path
-          alt={action}
-          width={32}
-          height={32}
-          className="h-4 w-4" // Ensure consistent size
-        />
-      </button>
-    ),
+  const PlayerButton = ({
+    onClickFunction,
+    action,
+    isActive = false,
+  }: {
+    onClickFunction: () => void;
+    action: string;
+    isActive?: boolean;
+  }) => (
+    <button
+      onClick={onClickFunction}
+      className={`flex aspect-square h-8 w-8 items-center justify-center rounded-full ${
+        isActive ? "bg-primary-300" : "bg-primary-200"
+      }`}
+    >
+      <Image
+        src={`/SVGs/${action}.svg`}
+        alt={action}
+        width={32}
+        height={32}
+        className="size-[16px] object-contain"
+        priority // Ensures images are preloaded
+      />
+    </button>
   );
 
   PlayerButton.displayName = "PlayerButton";
@@ -150,7 +146,7 @@ const AudioPlayer = ({
   return (
     <>
       {showModal && <Modal />}
-      <div className="flex flex-col items-center bg-green-200">
+      <div className="flex flex-col items-center">
         <div className="flex w-full">
           <div className="ml-8 flex flex-grow items-center justify-center gap-4">
             <PlayerButton
@@ -186,7 +182,7 @@ const AudioPlayer = ({
             min={0}
             max={1}
             step={0.01}
-            className="anim-el range-input mix-blend-multiply"
+            className="range-input bg-transparent"
             onMouseDown={() => setIsSeeking(true)}
             onMouseUp={(e) => {
               setIsSeeking(false);
@@ -194,7 +190,7 @@ const AudioPlayer = ({
             }}
             onChange={(e) => setCurrTime(parseFloat(e.currentTarget.value))}
           />
-          <div className="anim-el text-xs">
+          <div className="text-xs">
             {audioRef.current
               ? formatDuration(currTime * audioRef.current.duration)
               : "0:00"}
