@@ -1,6 +1,8 @@
-import {defineConfig} from 'sanity'
+import {defineConfig, isDev} from 'sanity'
+
 import {schemaTypes} from './schemaTypes'
 import {structureTool} from 'sanity/structure'
+import {vercelDeployTool} from 'sanity-plugin-vercel-deploy'
 import {visionTool} from '@sanity/vision'
 
 export default defineConfig({
@@ -39,7 +41,10 @@ export default defineConfig({
               .icon(() => '🤔'),
           ]),
     }),
-    visionTool(),
+
+    vercelDeployTool(),
+
+    ...(isDev ? [visionTool()] : []),
   ],
 
   schema: {

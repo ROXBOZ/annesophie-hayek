@@ -44,7 +44,7 @@ function Header({
             const isCurrentPage = currentPath === "/" + page.slug[lang].current;
             return (
               <Link
-                className={`${isHomepage && "anim-el"} flex rounded-full px-4 py-1 font-semibold outline-teal-500 hover:bg-primary-50 hover:transition-all hover:delay-200 focus:outline-4 active:bg-primary-100 ${isCurrentPage && "bg-primary-50"}`}
+                className={`${isHomepage && "anim-el"} flex rounded-full px-4 py-1 font-semibold outline-teal-500 hover:bg-secondary-100 hover:transition-all hover:delay-200 focus:outline-4 active:bg-secondary-200 ${isCurrentPage && "bg-primary-100"}`}
                 href={page.slug[lang].current}
                 key={index}
               >
