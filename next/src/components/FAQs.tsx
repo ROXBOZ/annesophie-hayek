@@ -25,7 +25,7 @@ function FAQs({ faqs, lang }: { faqs: FAQ[]; lang: "en" | "fr" }) {
                     className="anim-el flex w-full justify-between focus:outline-2 focus:outline-teal-500"
                   >
                     <h3
-                      className={`pr-4 text-left transition-all delay-100 hover:font-semibold ${expandedIndex === index && "font-semibold"}`}
+                      className={`pr-4 text-left font-semibold transition-all delay-100`}
                     >
                       {faq.question[lang]}
                     </h3>
