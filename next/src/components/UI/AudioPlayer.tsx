@@ -16,15 +16,15 @@ const AudioPlayer = ({
     en: TypedObject | TypedObject[];
   };
 }) => {
-  useAnimateElements(); // Keeps your animations functional
+  useAnimateElements();
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currTime, setCurrTime] = useState(0); // Tracks progress (0 to 1)
+  const [currTime, setCurrTime] = useState(0);
   const [isSeeking, setIsSeeking] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // Play/pause logic
+  // Play/Pause logic
   useEffect(() => {
     const audio = audioRef.current;
     if (audio) {
@@ -133,11 +133,11 @@ const AudioPlayer = ({
       }`}
     >
       <Image
-        src={`SVGs/${action}.svg`}
+        src={`/SVGs/${action}.svg`}
         alt={action}
-        width={500}
-        height={500}
-        className="size-4"
+        width={32}
+        height={32}
+        className="h-4 w-4" // Consistent size
       />
     </button>
   );
