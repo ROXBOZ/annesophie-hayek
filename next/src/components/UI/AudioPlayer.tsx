@@ -75,7 +75,7 @@ const AudioPlayer = ({
       if (modalRef.current) {
         modalRef.current.focus();
       }
-    }, []);
+    }, [isPlaying]);
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
       if (event.key === "Escape") {
@@ -150,7 +150,7 @@ const AudioPlayer = ({
   return (
     <>
       {showModal && <Modal />}
-      <div className="flex flex-col items-center bg-yellow-200">
+      <div className="flex flex-col items-center bg-orange-200">
         <div className="flex w-full">
           <div className="ml-8 flex flex-grow items-center justify-center gap-4">
             <PlayerButton
