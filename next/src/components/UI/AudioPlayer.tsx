@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import Image from "next/image";
 import { PortableText } from "@portabletext/react";
-import { useAnimateElements } from "@/lib/gsap";
+import { useAnimateElements } from "@/lib/gsap"; // Your custom animation hook
 
 const AudioPlayer = ({
   audioUrl,
@@ -16,7 +16,7 @@ const AudioPlayer = ({
     en: TypedObject | TypedObject[];
   };
 }) => {
-  useAnimateElements();
+  useAnimateElements(); // Keeps your animations functional
   const [isPlaying, setIsPlaying] = useState(false);
   const [currTime, setCurrTime] = useState(0);
   const [newTime, setNewTime] = useState(0);
@@ -25,11 +25,12 @@ const AudioPlayer = ({
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
+  // Handle play/pause
   useEffect(() => {
     const audio = audioRef.current;
     if (audio) {
       if (isPlaying) {
-        audio.play();
+        audio.play().catch((err) => console.error("Error playing audio:", err));
       } else {
         audio.pause();
       }
@@ -99,12 +100,10 @@ const AudioPlayer = ({
         <div className="min-h-1/2 relative w-full overflow-scroll rounded-xl bg-white px-12 pb-24 pt-12 md:w-1/2">
           <button
             className="fixed right-6 top-6 flex aspect-square rounded-full p-3 ring-inset ring-primary-50 transition-all delay-200 hover:ring active:bg-primary-50 md:absolute"
-            onClick={() => {
-              setShowModal(false);
-            }}
+            onClick={() => setShowModal(false)}
           >
             <span className="leading-3">✕</span>
-            <span className="sr-only">fermer</span>
+            <span className="sr-only">Close</span>
           </button>
           <div className="mx-auto flex max-w-[65ch] flex-col gap-1">
             <h2 className="pb-4 text-2xl">
@@ -117,7 +116,7 @@ const AudioPlayer = ({
     );
   };
 
-  // Reusable player button component
+  // Player Button Component
   const PlayerButton = ({
     onClickFunction,
     action,
@@ -126,30 +125,28 @@ const AudioPlayer = ({
     onClickFunction: () => void;
     action: string;
     isActive?: boolean;
-  }) => {
-    return (
-      <button
-        onClick={onClickFunction}
-        className={`anim-el flex aspect-square h-auto rounded-full p-2 outline-teal-500 ring-inset hover:ring hover:transition-all hover:delay-200 focus:outline-4 ${
-          isActive
-            ? "bg-primary-300 ring-primary-400"
-            : "bg-primary-200 ring-primary-300"
-        }`}
-      >
-        <Image
-          src={`SVGs/${action}.svg`}
-          alt={action}
-          width={500}
-          height={500}
-          className="size-4"
-        />
-      </button>
-    );
-  };
+  }) => (
+    <button
+      onClick={onClickFunction}
+      className={`anim-el flex aspect-square h-auto rounded-full p-2 outline-teal-500 ring-inset hover:ring hover:transition-all hover:delay-200 focus:outline-4 ${
+        isActive
+          ? "bg-primary-300 ring-primary-400"
+          : "bg-primary-200 ring-primary-300"
+      }`}
+    >
+      <Image
+        src={`SVGs/${action}.svg`}
+        alt={action}
+        width={500}
+        height={500}
+        className="size-4"
+      />
+    </button>
+  );
 
   return (
     <>
-      {showModal && audioDescription && <Modal />}
+      {showModal && <Modal />}
       <div className="flex flex-col items-center">
         <div className="flex w-full">
           {/* Playback Controls */}
@@ -172,12 +169,9 @@ const AudioPlayer = ({
             />
           </div>
           <div className="group relative ml-auto mr-1">
-            <div className="absolute -right-0 -top-10 rounded bg-primary-200 px-2 py-1 text-xs font-semibold opacity-0 transition-opacity delay-300 group-hover:opacity-100">
-              {lang === "fr" ? "Audiodescription" : "Audiotranslation"}
-            </div>
             <PlayerButton
               onClickFunction={() => setShowModal((prev) => !prev)}
-              action={`${lang === "fr" ? "read" : "translation"}`}
+              action={lang === "fr" ? "read" : "translation"}
             />
           </div>
         </div>
