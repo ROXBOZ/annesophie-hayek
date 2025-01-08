@@ -126,18 +126,24 @@ const AudioPlayer = ({
   }) => (
     <button
       onClick={onClickFunction}
-      className={`flex aspect-square h-8 w-8 items-center justify-center rounded-full ${
-        isActive ? "bg-primary-300" : "bg-primary-200"
-      }`}
+      className="group flex size-12 items-center justify-center"
     >
-      <Image
-        src={`/SVGs/${action}.svg`}
-        alt={action}
-        width={32}
-        height={32}
-        className="size-[16px] object-contain"
-        priority // Ensures images are preloaded
-      />
+      <div
+        className={`flex aspect-square size-8 items-center justify-center rounded-full ${
+          isActive
+            ? "bg-primary-300"
+            : "group-active:primary-300 md:group-active:primary-400 bg-primary-200 group-hover:bg-primary-300"
+        }`}
+      >
+        <Image
+          src={`/SVGs/${action}.svg`}
+          alt={action}
+          width={32}
+          height={32}
+          className="size-[16px] object-contain"
+          priority // Ensures images are preloaded
+        />
+      </div>
     </button>
   );
 
@@ -148,7 +154,7 @@ const AudioPlayer = ({
       {showModal && <Modal />}
       <div className="flex flex-col items-center">
         <div className="flex w-full">
-          <div className="ml-8 flex flex-grow items-center justify-center gap-4">
+          <div className="ml-8 flex flex-grow items-center justify-center">
             <PlayerButton
               aria-label="Backward 10 seconds"
               onClickFunction={handleBackward}
