@@ -128,7 +128,7 @@ const AudioPlayer = ({
     }) => (
       <button
         onClick={onClickFunction}
-        className={`anim-el flex aspect-square h-auto rounded-full p-2 outline-teal-500 ring-inset hover:ring hover:transition-all hover:delay-200 focus:outline-4 ${
+        className={`flex aspect-square h-auto rounded-full p-2 outline-teal-500 ring-inset hover:ring hover:transition-all hover:delay-200 focus:outline-4 ${
           isActive
             ? "bg-primary-300 ring-primary-400"
             : "bg-primary-200 ring-primary-300"
@@ -150,7 +150,7 @@ const AudioPlayer = ({
   return (
     <>
       {showModal && <Modal />}
-      <div className="flex flex-col items-center bg-orange-200">
+      <div className="flex flex-col items-center bg-violet-200">
         <div className="flex w-full">
           <div className="ml-8 flex flex-grow items-center justify-center gap-4">
             <PlayerButton
